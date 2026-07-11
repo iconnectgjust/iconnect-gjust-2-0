@@ -1,6 +1,6 @@
 import "./SeedBenefits.css";
-import "./SeedScrollanimations.css";
-import useScrollAnimation from "./SeedScrollanimations";
+import "../../ScrollAnimation.css";
+import useScrollAnimation from "../../ScrollAnimation";
 import React from "react";
 
 const benefits = [

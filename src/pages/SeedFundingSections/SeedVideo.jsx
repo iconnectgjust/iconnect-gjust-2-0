@@ -1,6 +1,6 @@
 import "./SeedVideo.css";
-import "./SeedScrollanimations.css";
-import useScrollAnimation from "./SeedScrollanimations";
+import "../../ScrollAnimation.css";
+import useScrollAnimation from "../../ScrollAnimation";
 import React from "react";
 import Youtube from "react-youtube-embed";
 

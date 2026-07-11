@@ -2,11 +2,11 @@
   width: 100%;
   height: auto;
   display: flex;
-  padding: 95px 5vw 60px 5vw; 
+  padding: 95px 5vw 60px 5vw;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  overflow-x: hidden; 
+  overflow-x: clip;
 }
 
 .whitesec h1 {
@@ -19,12 +19,32 @@
   margin-bottom: 50px;
 }
 
-.fourcardcontainer {
+.whitesec h1::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: 22px auto 0;
+  background: #0F1C33;
+}
+
+.teamrow {
   display: flex;
   width: 100%;
   max-width: 1250px;
-  height: 440px;
-  align-items: center;
+  align-items: stretch;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+.teamgrid {
+  display: flex;
+  width: 100%;
+  max-width: 1250px;
+  align-items: stretch;
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
@@ -36,33 +56,21 @@
   width: 270px;
   height: 380px;
   flex-direction: column;
-  align-items: flex-start;
-  border-radius: 17.258px;
+  align-items: center;
   box-sizing: border-box;
-  padding: 11.51px;
+  padding: 11.5px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  background: linear-gradient(180deg, #111111 0%, #111111 68%, #0064A5 100%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
-.fourcardcontainer:nth-of-type(1) .smallcard {
-  background: linear-gradient(153deg, #000 91.54%, #937600 99.24%);
-}
-
-.fourcardcontainer:nth-of-type(2) .smallcard {
-  background: linear-gradient(153deg, #000 91.54%, #00884D 99.24%);
-}
-
-.fourcardcontainer:nth-of-type(3) .smallcard {
-  background: linear-gradient(153deg, #000 91.54%, #0064A5 99.24%);
-}
-
-.fourcardcontainer:nth-of-type(4) .smallcard {
-  background: linear-gradient(153deg, #000 91.54%, #0064A5 99.24%);
-}
-.fourcardcontainer:nth-of-type(3){
-  padding-top: 20px;
-  height: 400px;
-}
-.fourcardcontainer:nth-of-type(4){
-  padding-top: 20px;
+.smallcard:hover {
+  transform: translateY(-16px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.35);
 }
 
 .smallcard img {
@@ -75,42 +83,84 @@
 }
 
 .smallcard h2 {
-  color: var(--Neutrals-White, #FFF);
+  width: 100%;
+  text-align: center;
+  color: #fff;
   font-family: "Helvetica";
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  line-height: 125%;
-  margin-bottom: 5px;
-  margin-top: 3px;
-  letter-spacing: 1.1px;
+  margin: 0 0 10px;
+  letter-spacing: 0.5px;
 }
 
 .smallcard p {
-  color: var(--Neutrals-Black-600, #F3F3F3);
+  align-self: center;
+  color: #f3f3f3;
   font-family: "Roboto";
   font-size: 0.8rem;
   font-weight: 400;
-  line-height: 150%;
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  max-width: 100%;
 }
 
+/* Color accents, applied per-card via class */
+.smallcard.card-red {
+  background: linear-gradient(
+    180deg,
+    #111111 0%,
+    #111111 68%,
+    #650000 100%
+  );
+}
+
+.smallcard.card-purple {
+  background: linear-gradient(
+    180deg,
+    #111111 0%,
+    #111111 68%,
+    #6D2B72 100%
+  );
+}
+
+.smallcard.card-yellow {
+  background: linear-gradient(
+    180deg,
+    #111111 0%,
+    #111111 68%,
+    #5F4700 100%
+  );
+}
+
+.smallcard.card-green {
+  background: linear-gradient(
+    180deg,
+    #111111 0%,
+    #111111 68%,
+    #00663A 100%
+  );
+}
+
+.smallcard.card-blue {
+  background: linear-gradient(
+    180deg,
+    #111111 0%,
+    #111111 68%,
+    #004D80 100%
+  );
+}
 
 /* Tablet */
 @media (max-width: 1300px) {
-  .fourcardcontainer:nth-of-type(3){
-  height: auto;
-      margin-bottom: 30px;
-  }
-  .fourcardcontainer:nth-of-type(4){
-      padding-top: 0px;
-  }
-  .fourcardcontainer {
+  .teamrow,
+  .teamgrid {
     width: 100%;
     justify-content: center;
     gap: 30px;
-  }
-  .fourcardcontainer{
-    height: auto;
-    margin-bottom: 20px;
   }
 }
 
@@ -119,27 +169,15 @@
   .whitesec {
     padding: 60px 30px;
   }
-  .fourcardcontainer{
-    height: auto;
-    margin-bottom: 0;
-  }
 
-  .fourcardcontainer {
-    flex-direction: column;
-    height: auto;
+  .teamrow,
+  .teamgrid {
+    gap: 20px;
+    margin-bottom: 20px;
   }
 
   .smallcard {
     margin-bottom: 20px;
-  }
-  .fourcardcontainer:nth-of-type(2){
-      margin-bottom: 30px;
-  }
-   .fourcardcontainer:nth-of-type(1){
-      margin-bottom: 30px;
-  }
-    .fourcardcontainer:nth-of-type(3){
-      padding-top: 0;
   }
 }
 

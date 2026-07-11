@@ -21,7 +21,7 @@ function Aboutushero(){
                     <img src={yellowarrow} alt="about section" />
                 </div>
                 <div className="h1-wrapper">
-                    <h1>ABOUT US</h1>
+                    <h1 className="reveal fade-up">ABOUT US</h1>
                 </div>
             </section>
         </>

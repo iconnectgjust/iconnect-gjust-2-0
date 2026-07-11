@@ -4,7 +4,7 @@
   padding-top: 180px;
   background-color: black;
   position: relative;
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 .greenarrow,
@@ -118,7 +118,7 @@
 
 @media (max-width: 400px) {
   .aboutus-blacksection h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     margin-top: 0;
   }
 }

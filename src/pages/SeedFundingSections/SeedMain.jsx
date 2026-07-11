@@ -1,7 +1,7 @@
 import "./SeedMain.css";
 import mainimage from "../../assets/SeedMainImage.png";
-import "./SeedScrollanimations.css";
-import useScrollAnimation from "./SeedScrollanimations";
+import "../../ScrollAnimation.css";
+import useScrollAnimation from "../../ScrollAnimation";
 import React from "react";
 
 const handleScrollLink = (e, targetId) => {

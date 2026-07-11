@@ -1,6 +1,6 @@
 import "./SeedUpdates.css";
-import "./SeedScrollanimations.css";
-import useScrollAnimation from "./SeedScrollanimations";
+import "../../ScrollAnimation.css";
+import useScrollAnimation from "../../ScrollAnimation";
 import React, { useState }from "react";
 
 const TABS = ["All", "Announcements", "Deadlines", "Schedules", "Results"];

@@ -1,85 +1,86 @@
 import "./Manageaboutus.css";
-// import bigcardimage from "../../assets/bigcard.png";
-//import manprofile from "../../assets/manprofile.jpg";
-import opsang from "../../assets/oopsangwan.jpeg";
+import vishal from "../../assets/vishalgulati.png";
+import munish from "../../assets/munishgupta.png";
 import vimal from "../../assets/vvimal.jpeg";
+import mani from "../../assets/manishrestha.jpeg";
+import abhimanyu from "../../assets/abhimanyunain.jpeg";
+import sumitsaroha from "../../assets/sumitsaroha.png";
 import sunil from "../../assets/ssunil.jpeg";
-import vijay from "../../assets/vvijay.jpeg";
 import rajendar from "../../assets/rajenderr.jpeg";
-import ajay from "../../assets/ajaykumar.jpeg";
+import bijender from "../../assets/bijenderkaushik.png";
+import vijay from "../../assets/vvijay.jpeg";
 import narender from "../../assets/narender.jpeg";
-import sandeep from "../../assets/sandeep.jpeg";
+import sahil from "../../assets/sahilkaushik.png";
 import sumit from "../../assets/sumit.jpeg";
 
-function Manageaboutus(){
-    return(
-        <>
-        <section className="greysec">
-            <h1>Faculty</h1>
-            <div className="onecardcontainer">
-                    <div className="bigcard">
-                        <img src={opsang} alt="about section" loading="lazy"/>
-                        <h2>Prof. O.P Sangwan</h2>
-                        <p>Director PDUIIC</p>
-                    </div>
-            </div>
-            <div className="fourcardcontainer">
-                 {/* <div className="smallcard">
-                    <img src={opsang} alt="about section" loading="lazy"/>
-                    <h2>Prof. O.P Sangwan</h2>
-                    <p>Director PDUIIC</p>
-                 </div> */}
-                 <div className="smallcard">
-                    <img src={vimal} alt="about section" loading="lazy"/>
-                    <h2>Mr. Vimal K Jha</h2>
-                    <p>Deputy Director PDUIIC</p>
-                 </div>
-            </div>
-            <div className="fourcardcontainer">
-                 <div className="smallcard">
-                    <img src={sunil} alt="about section" loading="lazy"/>
-                    <h2>Dr. Sunil Kumar</h2>
-                    <p>Coordinator PDUIIC</p>
-                 </div>
-                 <div className="smallcard">
-                    <img src={rajendar} alt="about section" loading="lazy"/>
-                    <h2>Dr. Rajender Singh</h2>
-                    <p>Coordinator PDUIIC</p>
-                 </div>
-            </div>
-             <div className="fourcardcontainer">
-                 <div className="smallcard">
-                    <img src={ajay} alt="about section" loading="lazy"/>
-                    <h2>Mr. Ajay Kumar</h2>
-                    <p>Coordinator Idea Lab</p>
-                 </div>
-                 <div className="smallcard">
-                    <img src={narender} alt="about section" loading="lazy"/>
-                    <h2>Dr. Narender Kumar</h2>
-                    <p>Coordinator Idea Lab</p>
-                 </div>
-                 
-            </div>
-            <div className="fourcardcontainer">
-                 <div className="smallcard">
-                    <img src={vijay} alt="about section" loading="lazy"/>
-                    <h2>Dr. Vijay Pal Singh</h2>
-                    <p>Coordinator Idea Lab</p>
-                 </div>
-                 <div className="smallcard">
-                    <img src={sumit} alt="about section" loading="lazy"/>
-                    <h2>Dr. Sumit Sharma</h2>
-                    <p>Coordinator Idea Lab</p>
-                 </div>
-                 <div className="smallcard">
-                    <img src={sandeep} alt="about section" loading="lazy"/>
-                    <h2>Dr. Sandeep Jindal</h2>
-                    <p>Coordinator Idea Lab</p>
-                 </div>
-            </div>
-        </section>
-        </>
-    );
+import "../../ScrollAnimation.css";
+import useScrollAnimation from "../../ScrollAnimation";
+
+const bigMember = {
+  img: vishal,
+  name: "Prof. Vishal Gulati",
+  role: "Director PDUIIC",
+  color: "card-red",
+};
+
+const directors = [
+  { img: munish, name: "Prof. Munish Gupta", role: "Additional Director PDUIIC", color: "card-purple" },
+  { img: vimal, name: "Sh. Vimal K Jha", role: "Deputy Director & P.O.P PDUIIC", color: "card-purple" },
+  { img: mani, name: "Dr. Mani Shrestha", role: "Deputy Director PDUIIC", color: "card-purple" },
+  { img: abhimanyu, name: "Dr. Abhimanyu Nain", role: "Deputy Director PDUIIC", color: "card-purple" },
+];
+
+const pduiicCoordinators = [
+  { img: sumitsaroha, name: "Dr. Sumit Saroha", role: "Coordinator PDUIIC", color: "card-yellow" },
+  { img: sunil, name: "Dr. Sunil Kumar", role: "Coordinator PDUIIC", color: "card-yellow" },
+  { img: rajendar, name: "Dr. Rajender Singh", role: "Coordinator PDUIIC", color: "card-yellow" },
+  { img: bijender, name: "Dr. Bijender Kaushik", role: "Coordinator PDUIIC", color: "card-yellow" },
+];
+
+const ideaLabCoordinators = [
+  { img: vijay, name: "Dr. Vijay Pal Singh", role: "Coordinator Idea Lab", color: "card-green" },
+  { img: narender, name: "Dr. Narender Kumar", role: "Coordinator Idea Lab", color: "card-green" },
+  { img: sahil, name: "Dr. Sahil Kaushik", role: "Coordinator Idea Lab", color: "card-green" },
+  { img: sumit, name: "Dr. Sumit Sharma", role: "Coordinator Idea Lab", color: "card-green" },
+];
+
+function renderCard(member, index) {
+   useScrollAnimation();
+
+  return (
+    <div
+      key={member.name + index}
+      className={`smallcard ${member.color} reveal fade-up delay-1`}
+    >
+      <img src={member.img} alt="about section" loading="lazy" />
+      <h2>{member.name}</h2>
+      <p>{member.role}</p>
+    </div>
+  );
+}
+
+function Manageaboutus() {
+  useScrollAnimation();
+
+  return (
+    <>
+      <section className="whitesec">
+        <h1 className="reveal fade-up">FACULTY</h1>
+
+        <div className="bigcardrow">
+          <div className={`bigcard ${bigMember.color} reveal fade-up delay-1`}>
+            <img src={bigMember.img} alt="about section" loading="lazy" />
+            <h2>{bigMember.name}</h2>
+            <p>{bigMember.role}</p>
+          </div>
+        </div>
+
+        <div className="teamrow">{directors.map(renderCard)}</div>
+        <div className="teamrow">{pduiicCoordinators.map(renderCard)}</div>
+        <div className="teamrow">{ideaLabCoordinators.map(renderCard)}</div>
+      </section>
+    </>
+  );
 }
 
 export default Manageaboutus
