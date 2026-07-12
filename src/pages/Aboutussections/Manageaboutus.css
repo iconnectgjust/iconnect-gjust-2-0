@@ -267,6 +267,14 @@
 }
 
 @media (max-width: 480px) {
+  .teamrow,
+  .teamgrid,
+  .bigcardrow {
+    width: 100%;
+    justify-content: center;
+    gap: 30px;
+  }
+
   .whitesec h1 {
     font-size: 2rem;
   }
