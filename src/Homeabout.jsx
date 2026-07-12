@@ -51,14 +51,14 @@ function Homeabout() {
           <div className="stats">
             <div className="stat-box">
               <h2>56+</h2>
-              <p>EVENT ORGANIZED</p>
+              <p>EVENT CONDUCTED</p>
             </div>
             <div className="stat-box">
-              <h2>11000+</h2>
+              <h2>25,000+</h2>
               <p>FOOTFALLS ACROSS<br />EVENTS</p>
             </div>
             <div className="stat-box">
-              <h2>500000+</h2>
+              <h2>1M+</h2>
               <p>IMPRESSIONS ACROSS<br />THE PLATFORMS</p>
             </div>
           </div>
