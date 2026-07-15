@@ -126,7 +126,7 @@ function SeedNavbar() {
       </nav>
       <div className="announcement-bar">
           <div className="announcement-track">
-            📢 Important: Submit BOTH a hard copy and a soft copy of your proposal to PDUIIC, GJUST Hisar before the deadline.
+            📢 Important : Offline Presentation Round of Seed Funding will held on 22nd July, 2026.
           </div>
         </div>
     </>

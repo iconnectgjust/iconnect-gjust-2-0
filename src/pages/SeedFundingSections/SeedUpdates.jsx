@@ -8,15 +8,14 @@ const TABS = ["All", "Announcements", "Deadlines", "Schedules", "Results"];
 const announcements = [
   {
     id: 1,
-    date: "June 15, 2026",
-    time: "10:00 AM",
-    tags: [
-      { label: "OPEN", type: "open" },
+    date: "July 22, 2026",
+    time: "02:30 PM Onwards",
+    tags: [{ label: "OPEN", type: "open" },
       { label: "URGENT", type: "urgent", dot: true },
     ],
-    title: "Applications Now Open for Seed Funding 2026",
+    title: "Offline Presentations",
     description:
-      "Seed funding opportunity 2026 is officially accepting proposal. All eligible UG, PG, and PhD students may submit their proposals through the official portal and at the PDUIIC office.",
+      "Shortlisted candidates with the complete team, along with the Project Mentor (Compulsory), must be present during the presentation. Participants are requested to report to the venue at least 15 minutes before their allotted presentation slot with their presentation and any supporting materials. Non-attendance or the absence of the Project Mentor may lead to disqualification from further consideration.",
     category: "Announcements",
   },
   {
@@ -28,6 +27,16 @@ const announcements = [
     description:
       "Applications for the Seed Funding Opportunity 2026 will close soon. All interested applicants are encouraged to submit their proposals before the deadline.",
     category: "Deadlines",
+  },
+  {
+    id: 3,
+    date: "June 15, 2026",
+    time: "10:00 AM",
+    tags: [{ label: "OPEN", type: "open" }],
+    title: "Applications Now Open for Seed Funding 2026",
+    description:
+      "Seed funding opportunity 2026 is officially accepting proposal. All eligible UG, PG, and PhD students may submit their proposals through the official portal and at the PDUIIC office.",
+    category: "Announcements",
   },
 ];
 

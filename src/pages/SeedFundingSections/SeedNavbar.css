@@ -141,7 +141,7 @@ a {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   animation: marquee 18s linear infinite;
 }

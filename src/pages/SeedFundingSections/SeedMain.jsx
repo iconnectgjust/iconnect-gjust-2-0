@@ -34,7 +34,7 @@ useScrollAnimation();
         <div className="hero-content reveal slide-left">
           <div className="badge">
             <span className="dot"></span>
-            <h2>Applications open - June 2026</h2>
+            <h2>Offline Presentations - July 22, 2026</h2>
           </div>
 
           <h1>
