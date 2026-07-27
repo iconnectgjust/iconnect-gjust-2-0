@@ -234,7 +234,6 @@ body {
   text-transform: uppercase;
 }
 
-/* === Responsive === */
 @media (max-width: 1136px) {
   .banner {
     flex-direction: column;
@@ -600,4 +599,13 @@ body {
     font-size: 0.65rem;
     line-height: 1.3;
   }
+}
+/* Post-redesign adjustments: exclamation decoration removed, text justified */
+.whiteabout {
+  padding-top: 4.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.about-section p {
+  text-align: justify;
 }

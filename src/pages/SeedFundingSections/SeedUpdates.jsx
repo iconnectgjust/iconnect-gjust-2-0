@@ -8,8 +8,8 @@ const TABS = ["All", "Announcements", "Deadlines", "Schedules", "Results"];
 const announcements = [
   {
     id: 1,
-    date: "July 22, 2026",
-    time: "02:30 PM Onwards",
+    date: "July 28, 2026",
+    time: "10:30 AM Onwards",
     tags: [{ label: "OPEN", type: "open" },
       { label: "URGENT", type: "urgent", dot: true },
     ],
@@ -22,7 +22,7 @@ const announcements = [
     id: 2,
     date: "July 15, 2026",
     time: "11:59 PM",
-    tags: [{ label: "DEADLINE", type: "deadline" }],
+    tags: [{ label: "CLOSED", type: "deadline" }],
     title: "Application Deadline",
     description:
       "Applications for the Seed Funding Opportunity 2026 will close soon. All interested applicants are encouraged to submit their proposals before the deadline.",
@@ -32,7 +32,7 @@ const announcements = [
     id: 3,
     date: "June 15, 2026",
     time: "10:00 AM",
-    tags: [{ label: "OPEN", type: "open" }],
+    tags: [{ label: "CLOSED", type: "deadline" }],
     title: "Applications Now Open for Seed Funding 2026",
     description:
       "Seed funding opportunity 2026 is officially accepting proposal. All eligible UG, PG, and PhD students may submit their proposals through the official portal and at the PDUIIC office.",

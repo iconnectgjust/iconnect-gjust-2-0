@@ -1,0 +1,22 @@
+{
+  "_howToEdit": "Each album: id (short slug), title. Each image: file (filename in src/assets), caption, height (px for the masonry layout). Add new albums for each event/year.",
+  "albums": [
+    {
+      "id": "highlights",
+      "title": "Highlights",
+      "images": [
+        { "file": "Gallery1.jpeg", "caption": "iConnect moments", "height": 380 },
+        { "file": "Gallery9.jpeg", "caption": "iConnect moments", "height": 380 },
+        { "file": "Gallery3.jpeg", "caption": "iConnect moments", "height": 280 },
+        { "file": "Gallery16.JPG", "caption": "iConnect moments", "height": 600 },
+        { "file": "Gallery7.jpg", "caption": "iConnect moments", "height": 350 },
+        { "file": "Gallery5.JPG", "caption": "iConnect moments", "height": 310 },
+        { "file": "Gallery11.jpg", "caption": "iConnect moments", "height": 550 },
+        { "file": "Gallery20.jpg", "caption": "iConnect moments", "height": 680 },
+        { "file": "Gallery81.jpg", "caption": "iConnect moments", "height": 630 },
+        { "file": "Gallery2.JPG", "caption": "iConnect moments", "height": 570 },
+        { "file": "Gallery4.jpg", "caption": "iConnect moments", "height": 330 }
+      ]
+    }
+  ]
+}

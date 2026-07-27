@@ -1,0 +1,67 @@
+.five-is {
+  background-color: #000;
+  color: #fff;
+  padding: 90px 6% 100px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.five-is-heading {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.five-is-sub {
+  color: #aaa;
+  max-width: 620px;
+  margin: 18px auto 55px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.five-is-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.five-is-card {
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 3px solid var(--pillar-color);
+  border-radius: 18px;
+  padding: 34px 22px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.five-is-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
+}
+
+.five-is-card i {
+  font-size: 2.2rem;
+  color: var(--pillar-color);
+}
+
+.five-is-card h3 {
+  margin: 14px 0 10px;
+  font-size: 1.25rem;
+  color: var(--pillar-color);
+}
+
+.five-is-card p {
+  color: #bbb;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .five-is {
+    padding: 60px 6% 70px;
+  }
+}

@@ -73,11 +73,11 @@ function SeedFooter() {
               </span>
               <span>+91 94679 05906</span>
             </li>
-            <a href="mailto:iconnectgjust@gmail.com" className="mail-link">
+            <a href="mailto:support@iconnectgjust.in" className="mail-link">
               <span className="contact-icon">
                 <MailIcon />
               </span>
-              iconnectgjust@gmail.com
+              support@iconnectgjust.in
             </a>
           </ul>
 

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
-const useScrollAnimation = () => {
+// Pass a `dep` when the revealed elements render after an async data load,
+// so the observer re-attaches once they exist.
+const useScrollAnimation = (dep) => {
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
 
@@ -22,7 +24,8 @@ const useScrollAnimation = () => {
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dep]);
 };
 
 export default useScrollAnimation;

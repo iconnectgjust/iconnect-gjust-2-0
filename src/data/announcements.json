@@ -1,0 +1,14 @@
+{
+  "announcement": {
+    "enabled": true,
+    "text": "📢 Seed Funding Opportunity 2026 — Offline presentations on July 28, 2026",
+    "link": "/seedfunding",
+    "linkText": "Learn more"
+  },
+  "recruitment": {
+    "enabled": true,
+    "status": "Opening Soon",
+    "headline": "Recruitment for 2026–27",
+    "text": "Applications open soon. Drop your email and we'll notify you the moment they go live."
+  }
+}

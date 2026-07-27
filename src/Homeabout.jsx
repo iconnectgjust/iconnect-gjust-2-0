@@ -1,22 +1,13 @@
 import "./Homeabout.css";
 import aboutimage from "./assets/aboutimg.jpeg";
 import leftlogo from "./assets/iconnectlogo.png";
-import aboutlogo from "./assets/iconlogo.png";
 import { Link } from 'react-router-dom';
+import CountUp from "./CountUp";
 
 function Homeabout() {
   return (
     <>
       <section id="aboutus" className="whiteabout">
-        <div className="exclamation">
-          <svg xmlns="http://www.w3.org/2000/svg" width="6" height="90" viewBox="0 0 6 90" fill="none">
-            <path d="M3 3L3 87" stroke="black" strokeWidth="6" strokeLinecap="round" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <circle cx="5" cy="5" r="5" fill="black" />
-          </svg>
-        </div>
-
         <div className="aboutcontatiner">
           <div className="about-section">
             <h2>ABOUT US</h2>
@@ -29,7 +20,7 @@ function Homeabout() {
 
           <div className="aboutimage">
             <div className="image-bg"></div>
-            <img src={aboutimage} alt="about section" />
+            <img src={aboutimage} alt="Team iConnect at PDUIIC, GJUS&T Hisar" />
           </div>
 
           <div className="about-button">
@@ -50,15 +41,15 @@ function Homeabout() {
           </div>
           <div className="stats">
             <div className="stat-box">
-              <h2>56+</h2>
-              <p>EVENT CONDUCTED</p>
+              <h2><CountUp end={56} suffix="+" /></h2>
+              <p>EVENTS CONDUCTED</p>
             </div>
             <div className="stat-box">
-              <h2>25,000+</h2>
+              <h2><CountUp end={25000} suffix="+" /></h2>
               <p>FOOTFALLS ACROSS<br />EVENTS</p>
             </div>
             <div className="stat-box">
-              <h2>1M+</h2>
+              <h2><CountUp end={1} suffix="M+" duration={1200} /></h2>
               <p>IMPRESSIONS ACROSS<br />THE PLATFORMS</p>
             </div>
           </div>

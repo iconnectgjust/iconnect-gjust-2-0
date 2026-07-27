@@ -30,22 +30,22 @@ const handleExploreClick = (e) => {
       
       <section className="blacksection">
           <div className="ggreenarrow">
-                            <img src={greenarrow} alt="about section" />
+                            <img src={greenarrow} alt="" />
           </div>
           <div className="ppurplearrow">
-                            <img src={purplearrow} alt="about section" />
+                            <img src={purplearrow} alt="" />
                         </div>
                         <div className="rredarrow">
-                            <img src={redarrow} alt="about section" />
+                            <img src={redarrow} alt="" />
                         </div>
                         <div className="yyellowarrow">
-                            <img src={yellowarrow} alt="about section" />
+                            <img src={yellowarrow} alt="" />
                         </div>
         {/* <LottieFlow /> */}
         <ShinyText id="shine" text="We are" disabled={false} speed={3} className='custom-class' />
         <h1 className='maintitle'>
-          <span>i</span>
-          CONNECT SOCIETY
+          TEAM <span>i</span>
+          CONNECT
         </h1>
         <div className='rotwords'>
             <div>
@@ -58,11 +58,11 @@ const handleExploreClick = (e) => {
         </button>
 
         <div className="socials">
-          <a href="https://www.instagram.com/iconnectgjust/"><i className='bx bxl-instagram'></i></a>
-          <a href="https://x.com/iconnectgjust?t=GZGkd_h65aoTtg3M5MnmCg&s=08"><i className='bx bxl-twitter'></i></a>
-          <a href="https://www.whatsapp.com/channel/0029VaELUPEGU3BNfgEAmU0h"><i className='bx bxl-whatsapp' ></i></a>
-          <a href="https://www.linkedin.com/company/iconnect-gjust/"><i className='bx bxl-linkedin' ></i></a>
-          <a href="https://www.youtube.com/@iConnectGJUST"><i class='bx bxl-youtube' ></i></a>
+          <a href="https://www.instagram.com/iconnectgjust/" aria-label="Instagram"><i className='bx bxl-instagram'></i></a>
+          <a href="https://x.com/iconnectgjust?t=GZGkd_h65aoTtg3M5MnmCg&s=08" aria-label="X (Twitter)"><i className='bx bxl-twitter'></i></a>
+          <a href="https://www.whatsapp.com/channel/0029VaELUPEGU3BNfgEAmU0h" aria-label="WhatsApp"><i className='bx bxl-whatsapp' ></i></a>
+          <a href="https://www.linkedin.com/company/iconnect-gjust/" aria-label="LinkedIn"><i className='bx bxl-linkedin' ></i></a>
+          <a href="https://www.youtube.com/@iConnectGJUST" aria-label="YouTube"><i className='bx bxl-youtube' ></i></a>
         </div>
         <div className="scroll">Scroll Down<i className='bx bx-right-arrow-alt'></i></div>
     </section>

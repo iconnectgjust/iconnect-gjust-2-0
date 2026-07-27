@@ -5,12 +5,25 @@
 }
 
 .footerblack {
-  min-height: 48vh; 
+  min-height: 48vh;
   background-color: black;
   font-family: "Roboto", sans-serif;
   color: white;
   display: flex;
   flex-direction: column;
+}
+
+.foot-sub-status {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.foot-sub-ok {
+  color: #4ade80;
+}
+
+.foot-sub-err {
+  color: #f87171;
 }
 
 .footercontent {
@@ -31,7 +44,7 @@
   height: 280px;
 }
 
-.footsociety,
+.footlinks,
 .footfollow,
 .footget {
   display: flex;
@@ -42,7 +55,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.footsociety h2,
+.footlinks h2,
 .footfollow h2,
 .footget h2 {
   font-size: 1.1rem;
@@ -52,7 +65,7 @@
   width: 209px;
 }
 
-.footsociety h2::after,
+.footlinks h2::after,
 .footfollow h2::after,
 .footget h2::after {
   content: "";
@@ -69,7 +82,7 @@
   );
 }
 
-.footsociety a,
+.footlinks a,
 .footfollow a {
   text-decoration: none;
   padding-top: 12px;
@@ -83,7 +96,7 @@
   width: fit-content;
 }
 
-.footsociety a:hover,
+.footlinks a:hover,
 .footfollow a:hover {
   color: white;
 }
@@ -157,25 +170,34 @@
 }
 @media (max-width: 992px) {
   .footercontent {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0;
+    padding: 34px 6% 0;
   }
 
   .footimage {
     display: none;
   }
 
-  .footsociety,
-  .footfollow,
-  .footget {
-    width: 90%;
+  .footlinks,
+  .footfollow {
+    width: 48%;
     align-items: center;
     margin-top: 0;
     text-align: center;
   }
 
-  .footsociety h2,
+  .footget {
+    width: 100%;
+    align-items: center;
+    margin-top: 34px;
+    text-align: center;
+  }
+
+  .footlinks h2,
   .footfollow h2,
   .footget h2 {
     width: auto;
@@ -183,12 +205,15 @@
     font-style: normal;
     font-weight: 700;
   }
-  .footsociety h2{
-    padding-top: 60px;
+
+  .footlinks h2::after,
+  .footfollow h2::after,
+  .footget h2::after {
+    width: 100%;
   }
 
   .footget p {
-    max-width: 25%;
+    max-width: 320px;
   }
 
   .footgetcom {
@@ -211,7 +236,7 @@
 }
 
 @media (max-width: 576px) {
-  .footsociety h2,
+  .footlinks h2,
   .footfollow h2,
   .footget h2 {
     font-family: "Helvetica";
@@ -225,7 +250,7 @@
 }
 
 .footget input {
-  width: calc(100% - 60px); /* Leaves space for button */
+  width: calc(100% - 60px); 
   max-width: 90%;
   margin-bottom: 0;
 }
@@ -235,10 +260,7 @@
   font-size: 1.6rem;
 }
 .footget p {
-  white-space: nowrap;
   width: 100%;
   text-align: center;
-  display: flex;
-  justify-content: center;
 }
 }

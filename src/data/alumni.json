@@ -1,0 +1,9 @@
+{
+  "_howToEdit": "Add alumni under batches. Each member: name, role held at iConnect, now (current position/company), linkedin (full URL), img (filename in src/assets, optional). The page shows an invite message when empty.",
+  "batches": [
+    {
+      "year": "2024-25",
+      "members": []
+    }
+  ]
+}

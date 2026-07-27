@@ -386,11 +386,6 @@
   }
 }
 
-
-
-/* === RESPONSIVE BREAKPOINTS === */
-
-
 @media (max-width: 992px) {
   .blacksection {
     padding-top: 150px; 

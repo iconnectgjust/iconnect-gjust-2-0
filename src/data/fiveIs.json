@@ -1,0 +1,34 @@
+{
+  "pillars": [
+    {
+      "word": "Information",
+      "color": "#0099FF",
+      "icon": "bx-info-circle",
+      "desc": "Keeping students aware — of opportunities, technologies, schemes and everything happening in the innovation ecosystem."
+    },
+    {
+      "word": "Insight",
+      "color": "#00CC88",
+      "icon": "bx-brain",
+      "desc": "Going deeper than headlines — speaker sessions, mentorship and honest conversations with people who've built things."
+    },
+    {
+      "word": "Ideation",
+      "color": "#FF9900",
+      "icon": "bx-bulb",
+      "desc": "Turning awareness into ideas — brainstorms, hackathons and pitch events where raw thoughts become concepts."
+    },
+    {
+      "word": "Investigation",
+      "color": "#8428F1",
+      "icon": "bx-search-alt",
+      "desc": "Testing what's real — validating ideas, building prototypes, and learning from what breaks."
+    },
+    {
+      "word": "Implementation",
+      "color": "#FF0055",
+      "icon": "bx-rocket",
+      "desc": "Shipping — seed funding, incubation and institutional support to take validated ideas into the real world."
+    }
+  ]
+}

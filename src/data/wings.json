@@ -1,0 +1,14 @@
+{
+  "wings": [
+    { "name": "HR", "icon": "bx-group", "desc": "Recruitment, member engagement and keeping the team culture alive." },
+    { "name": "Innovation & Incubation", "icon": "bx-bulb", "desc": "Runs the idea pipeline — from ideation drives to incubation support with PDUIIC." },
+    { "name": "Marketing", "icon": "bx-trending-up", "desc": "Sponsorships, outreach and getting every event in front of the right audience." },
+    { "name": "Operations", "icon": "bx-cog", "desc": "On-ground execution — venues, schedules and everything running on time." },
+    { "name": "Media", "icon": "bx-camera", "desc": "Photography, videography and aftermovies that capture every moment." },
+    { "name": "Infographics", "icon": "bx-palette", "desc": "Posters, reels and the visual identity you see on every platform." },
+    { "name": "Content", "icon": "bx-pencil", "desc": "Captions, scripts, articles — the words behind the brand." },
+    { "name": "Information Systems", "icon": "bx-code-alt", "desc": "The website, data and tech that keep iConnect running digitally." },
+    { "name": "Planning & Logistics", "icon": "bx-calendar", "desc": "Event planning, materials and hospitality for guests and speakers." },
+    { "name": "Promotion", "icon": "bx-megaphone", "desc": "Campus buzz — class visits, word of mouth and community building." }
+  ]
+}

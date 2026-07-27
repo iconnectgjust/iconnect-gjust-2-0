@@ -1,0 +1,337 @@
+.pduiicpage {
+  padding-top: 104px;
+  background: #000;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
+.pduiicpage-hero {
+  text-align: center;
+  padding: 90px 6% 60px;
+}
+
+.pduiicpage-hero h1 {
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #ff0055, #ff9900, #00cc88, #0099ff, #8428f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pduiicpage-full {
+  color: #ddd;
+  margin-top: 14px;
+  font-size: 1.15rem;
+}
+
+.pduiicpage-tag {
+  color: #888;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.pduiicpage-about {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 40px 6% 80px;
+}
+
+.pduiicpage-abouttext {
+  flex: 1;
+  min-width: 300px;
+}
+
+.pduiicpage-abouttext h2 {
+  font-size: 1.8rem;
+  margin-bottom: 18px;
+}
+
+.pduiicpage-abouttext p {
+  color: #bbb;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.pduiicpage-aboutimg {
+  flex: 1;
+  min-width: 300px;
+}
+
+.pduiicpage-aboutimg img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.pduiicpage-facilities {
+  background: #0a0a0a;
+  padding: 80px 6%;
+  text-align: center;
+}
+
+.pduiicpage-facilities h2 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin-bottom: 50px;
+}
+
+.pduiicpage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pduiicpage-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 32px 24px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.pduiicpage-card:hover {
+  transform: translateY(-6px);
+}
+
+.pduiicpage-card i {
+  font-size: 2.2rem;
+  color: #ff9900;
+}
+
+.pduiicpage-card h3 {
+  margin: 14px 0 10px;
+  font-size: 1.2rem;
+}
+
+.pduiicpage-card p {
+  color: #aaa;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.pduiicpage-cta {
+  text-align: center;
+  padding: 90px 6%;
+}
+
+.pduiicpage-cta h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.pduiicpage-cta p {
+  color: #aaa;
+  margin: 14px 0 34px;
+}
+
+.pduiicpage-ctarow {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.pduiicpage-btn {
+  display: inline-block;
+  padding: 15px 36px;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #ff0055, #8428f1);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.pduiicpage-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.pduiicpage-btn-outline:hover {
+  border-color: #fff;
+}
+
+/* Key facts strip */
+.pduiicpage-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 6% 60px;
+}
+
+.pduiicpage-fact {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pduiicpage-fact i {
+  font-size: 1.8rem;
+  color: #ff9900;
+}
+
+.pduiicpage-factlabel {
+  color: #888;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.pduiicpage-factvalue {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* Objectives */
+.pduiicpage-objectives {
+  background: #0a0a0a;
+  padding: 80px 6%;
+}
+
+.pduiicpage-objectives h2 {
+  text-align: center;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin-bottom: 50px;
+}
+
+.pduiicpage-objlist {
+  list-style: none;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.pduiicpage-objlist li {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pduiicpage-objlist li:last-child {
+  border-bottom: none;
+}
+
+.pduiicpage-objnum {
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff0055, #8428f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.pduiicpage-objlist p {
+  color: #ccc;
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+/* Thematic areas */
+.pduiicpage-thematic {
+  text-align: center;
+  padding: 80px 6% 70px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pduiicpage-thematic h2 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+}
+
+.pduiicpage-thematicsub {
+  color: #999;
+  max-width: 720px;
+  margin: 16px auto 34px;
+  line-height: 1.7;
+}
+
+.pduiicpage-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pduiicpage-chip {
+  padding: 10px 22px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ddd;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.pduiicpage-chip:hover {
+  border-color: #ff9900;
+  color: #ff9900;
+}
+
+/* Director's message */
+.pduiicpage-director {
+  background: #0a0a0a;
+  padding: 80px 6%;
+}
+
+.pduiicpage-director h2 {
+  text-align: center;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin-bottom: 45px;
+}
+
+.pduiicpage-directorcard {
+  position: relative;
+  max-width: 850px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #ff9900;
+  border-radius: 18px;
+  padding: 44px 42px 36px;
+}
+
+.pduiicpage-quote {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-size: 2.2rem;
+  color: rgba(255, 153, 0, 0.4);
+}
+
+.pduiicpage-directorcard p {
+  color: #ccc;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.pduiicpage-directorsign {
+  display: block;
+  text-align: right;
+  color: #ff9900;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+@media (max-width: 600px) {
+  .pduiicpage-directorcard {
+    padding: 38px 24px 30px;
+  }
+}

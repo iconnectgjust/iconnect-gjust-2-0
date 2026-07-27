@@ -45,14 +45,12 @@ const ideaLabCoordinators = [
 ];
 
 function renderCard(member, index) {
-   useScrollAnimation();
-
   return (
     <div
       key={member.name + index}
       className={`smallcard ${member.color} reveal fade-up delay-1`}
     >
-      <img src={member.img} alt="about section" loading="lazy" />
+      <img src={member.img} alt={member.name} loading="lazy" />
       <h2>{member.name}</h2>
       <p>{member.role}</p>
     </div>
@@ -69,7 +67,7 @@ function Manageaboutus() {
 
         <div className="bigcardrow">
           <div className={`bigcard ${bigMember.color} reveal fade-up delay-1`}>
-            <img src={bigMember.img} alt="about section" loading="lazy" />
+            <img src={bigMember.img} alt={bigMember.name} loading="lazy" />
             <h2>{bigMember.name}</h2>
             <p>{bigMember.role}</p>
           </div>

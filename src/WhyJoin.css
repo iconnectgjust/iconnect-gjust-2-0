@@ -1,0 +1,159 @@
+.whyjoin {
+  background-color: #0a0a0a;
+  color: #fff;
+  padding: 90px 6%;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.whyjoin-heading {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+}
+
+.whyjoin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+.whyjoin-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 34px 24px;
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.whyjoin-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.whyjoin-card i {
+  font-size: 2.3rem;
+  background: linear-gradient(135deg, #ff0055, #8428f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.whyjoin-card h3 {
+  margin: 14px 0 10px;
+  font-size: 1.2rem;
+}
+
+.whyjoin-card p {
+  color: #aaa;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.recruit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 40px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, rgba(255, 0, 85, 0.14), rgba(132, 40, 241, 0.14));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-align: left;
+}
+
+.recruit-status {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 30px;
+  background: #ff9900;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.recruit-text h3 {
+  margin: 12px 0 8px;
+  font-size: 1.6rem;
+}
+
+.recruit-text p {
+  color: #bbb;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.recruit-inputrow {
+  display: flex;
+  gap: 10px;
+}
+
+.recruit-inputrow input {
+  padding: 13px 18px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 1rem;
+  min-width: 230px;
+  outline: none;
+}
+
+.recruit-inputrow input:focus {
+  border-color: #ff9900;
+}
+
+.recruit-inputrow button {
+  padding: 13px 26px;
+  border-radius: 40px;
+  border: none;
+  background: linear-gradient(135deg, #ff0055, #8428f1);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.recruit-inputrow button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.recruit-ok {
+  color: #4ade80;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.recruit-err {
+  color: #f87171;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 700px) {
+  .whyjoin {
+    padding: 60px 6%;
+  }
+  .recruit-banner {
+    padding: 28px 22px;
+  }
+  .recruit-inputrow {
+    flex-direction: column;
+    width: 100%;
+  }
+  .recruit-inputrow input {
+    min-width: 0;
+    width: 100%;
+  }
+}

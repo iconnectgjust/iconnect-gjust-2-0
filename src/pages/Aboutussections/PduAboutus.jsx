@@ -18,7 +18,7 @@ function pduAboutus(){
                 
                           <div className="aaboutimage">
                             <div className="iimage-bg reveal slide-right"></div>
-                            <img className="reveal slide-right delay-1" src={aboutimage} alt="about section" />
+                            <img className="reveal slide-right delay-1" src={aboutimage} alt="PDUIIC building at GJUS&T Hisar" />
                           </div>
                  </div>
                  <div className="visioncontainer">

@@ -17,7 +17,6 @@ function Homeinit(){
     setTimeout(() => {
       setShowEsummitMessage(false);
     }, 2500);
-    setNav(false);
   };
 
     return(
@@ -32,7 +31,7 @@ function Homeinit(){
                     <div className="leftcont">
                         <div className="initcard">
                             <article className="initimgcont">
-                                <img src={fest} alt="about section" loading="lazy"/>
+                                <img src={fest} alt="Konark Techfest — flagship tech fest of GJUS&T" loading="lazy"/>
                             </article>
                             <h2>Konark TechFest</h2>
                             <p>Our flagship tech fest, celebrating creativity, coding, and cutting-edge technology with workshops, hackathons, and competitions.</p>
@@ -40,7 +39,7 @@ function Homeinit(){
                         </div>
                         <div className="initcard">
                             <article className="initimgcont">
-                                <img src={esummit} alt="about section" loading="lazy"/>
+                                <img src={esummit} alt="E-Summit — entrepreneurship summit at GJUS&T" loading="lazy"/>
                             </article>
                             <h2>E-Summit</h2>
                             <p>A grand entrepreneurship summit featuring keynote speakers, startup founders, panel discussions, and idea showcases.</p>
@@ -50,7 +49,7 @@ function Homeinit(){
                     <div className="leftcont">
                             <div className="initcard">
                                 <article className="initimgcont">
-                                    <img src={seedFunding} alt="about section" loading="lazy"/>
+                                    <img src={seedFunding} alt="Seed Funding opportunity for student innovators" loading="lazy"/>
                                 </article>
                                 <h2>Seed Funding </h2>
                                 <p>This opportunity aims to empower student innovators by providing seed funding, mentorship, workspace, and institutional support to transform innovative ideas into impactful startup ventures.</p>
@@ -58,7 +57,7 @@ function Homeinit(){
                             </div>
                             <div className="initcard">
                                 <article className="initimgcont">
-                                    <img src={pitch} alt="about section" loading="lazy"/>
+                                    <img src={pitch} alt="Pitch Point — startup pitch competition" loading="lazy"/>
                                 </article>
                                 <h2>Pitch Point</h2>
                                 <p>A high-energy pitch competition where young innovators and aspiring entrepreneurs present their startup ideas to real investors and mentors.</p>
@@ -68,7 +67,7 @@ function Homeinit(){
                     <div className="rightcont">
                         <div className="initcard">
                              <article className="initimgcont">
-                                <img src={learn} alt="about section" loading="lazy"/>
+                                <img src={learn} alt="iConnect Learners — student upskilling initiative" loading="lazy"/>
                             </article>
                             <h2>iConnect Learners</h2>
                             <p>A continuous learning initiative focused on student upskilling via training sessions, technical talks, and hands-on workshops.</p>
@@ -76,7 +75,7 @@ function Homeinit(){
                         </div>
                         <div className="initcard">
                              <article className="initimgcont">
-                                <img src={sih} alt="about section" loading="lazy"/>
+                                <img src={sih} alt="Smart India Hackathon" loading="lazy"/>
                             </article>
                             <h2>Smart India Hackathon(SIH)</h2>
                             <p>A national-level hackathon where our team not only competes but also organizes internal hackathons and mentorship drives.</p>

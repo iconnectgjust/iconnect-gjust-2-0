@@ -1,0 +1,69 @@
+.announcement-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 42px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 44px;
+  background: linear-gradient(90deg, #1a0028, #001a2e);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.announcement-bar p {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Shift the fixed navbar below the bar while it is visible */
+body.has-announcement .header {
+  top: 42px;
+}
+
+.announcement-link {
+  margin-left: 10px;
+  color: #ffb347;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.announcement-link:hover {
+  text-decoration: underline;
+}
+
+.announcement-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #bbb;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.announcement-close:hover {
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .announcement-bar {
+    font-size: 0.85rem;
+    padding: 8px 40px;
+  }
+}

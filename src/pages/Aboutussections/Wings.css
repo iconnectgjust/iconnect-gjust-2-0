@@ -1,0 +1,61 @@
+.wings {
+  background: #fafafa;
+  padding: 90px 6%;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.wings h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.wings-sub {
+  color: #777;
+  margin: 16px auto 55px;
+  max-width: 560px;
+  font-size: 1.05rem;
+}
+
+.wings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 20px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.wings-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 30px 22px;
+  text-align: left;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wings-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.wings-card i {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #0099ff, #8428f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.wings-card h3 {
+  margin: 12px 0 8px;
+  font-size: 1.1rem;
+}
+
+.wings-card p {
+  color: #777;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}

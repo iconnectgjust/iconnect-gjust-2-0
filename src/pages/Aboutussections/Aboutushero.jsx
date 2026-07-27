@@ -9,16 +9,16 @@ function Aboutushero(){
         <>
             <section className="aboutus-blacksection">
                 <div className="greenarrow">
-                    <img src={greenarrow} alt="about section" />
+                    <img src={greenarrow} alt="" />
                 </div>
                  <div className="purplearrow">
-                    <img src={purplearrow} alt="about section" />
+                    <img src={purplearrow} alt="" />
                 </div>
                 <div className="redarrow">
-                    <img src={redarrow} alt="about section" />
+                    <img src={redarrow} alt="" />
                 </div>
                 <div className="yellowarrow">
-                    <img src={yellowarrow} alt="about section" />
+                    <img src={yellowarrow} alt="" />
                 </div>
                 <div className="h1-wrapper">
                     <h1 className="reveal fade-up">ABOUT US</h1>

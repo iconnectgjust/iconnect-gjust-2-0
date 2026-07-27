@@ -1,0 +1,80 @@
+.seedfaq {
+  background: #f5f8ff;
+  padding: 80px 6%;
+  font-family: "Roboto", sans-serif;
+}
+
+.seedfaq-heading {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #14346e;
+  margin-bottom: 45px;
+  font-weight: 800;
+}
+
+.seedfaq-list {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.seedfaq-item {
+  background: #fff;
+  border: 1px solid #e3e9f5;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(20, 52, 110, 0.05);
+}
+
+.seedfaq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a2b4d;
+  font-family: "Roboto", sans-serif;
+}
+
+.seedfaq-q i {
+  font-size: 1.5rem;
+  color: #14346e;
+  flex-shrink: 0;
+}
+
+.seedfaq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.seedfaq-open .seedfaq-a {
+  max-height: 300px;
+}
+
+.seedfaq-a p {
+  padding: 0 24px 22px;
+  color: #4a5a75;
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+@media (max-width: 600px) {
+  .seedfaq {
+    padding: 60px 5%;
+  }
+  .seedfaq-q {
+    font-size: 0.98rem;
+    padding: 18px 18px;
+  }
+  .seedfaq-a p {
+    padding: 0 18px 18px;
+  }
+}

@@ -1,0 +1,32 @@
+.contactpage {
+  padding-top: 104px;
+  background: #000;
+}
+
+.contactpage-hero {
+  text-align: center;
+  padding: 80px 6% 60px;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
+.contactpage-hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #ff0055, #ff9900, #00cc88, #0099ff, #8428f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.contactpage-hero p {
+  color: #aaa;
+  margin-top: 14px;
+  font-size: 1.05rem;
+}
+
+/* The embedded contact section keeps its own id="contact" — hide double padding */
+.contactpage .whitetouch {
+  min-height: auto;
+}

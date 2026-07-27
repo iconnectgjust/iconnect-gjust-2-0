@@ -1,0 +1,194 @@
+# Decap CMS configuration — edits the JSON data files in src/data/ via git commits.
+#
+# LOCAL editing (no setup needed):
+#   1. npx decap-server        (in one terminal)
+#   2. npm run dev             (in another)
+#   3. open http://localhost:5173/cms/index.html
+#
+# PRODUCTION editing (one-time setup, see CONTENT-EDITING.md):
+#   needs a GitHub OAuth app so editors log in with GitHub.
+
+backend:
+  name: github
+  repo: iconnectgjust/iConnect-Website
+  branch: main
+  commit_messages:
+    update: "content: update {{path}} via CMS"
+
+local_backend: true
+
+# Images uploaded through the CMS land in src/assets — reference them by FILENAME
+# (e.g. "rashi.png") in the fields below; the site resolves filenames automatically.
+media_folder: "src/assets"
+public_folder: "src/assets"
+
+site_url: https://www.iconnectgjust.in
+
+collections:
+  - name: "site-content"
+    label: "Site Content"
+    files:
+      - name: "announcements"
+        label: "Announcements & Recruitment"
+        file: "src/data/announcements.json"
+        format: json
+        fields:
+          - label: "Announcement Bar (homepage top strip)"
+            name: "announcement"
+            widget: object
+            fields:
+              - { label: "Show the bar", name: "enabled", widget: boolean }
+              - { label: "Text", name: "text", widget: string }
+              - { label: "Link (page path, e.g. /seedfunding)", name: "link", widget: string, required: false }
+              - { label: "Link text", name: "linkText", widget: string, required: false }
+          - label: "Recruitment Banner (Why Join section)"
+            name: "recruitment"
+            widget: object
+            fields:
+              - { label: "Show the banner", name: "enabled", widget: boolean }
+              - { label: "Status chip (e.g. Opening Soon / OPEN NOW)", name: "status", widget: string }
+              - { label: "Headline", name: "headline", widget: string }
+              - { label: "Text", name: "text", widget: string }
+
+      - name: "team"
+        label: "Team (year-wise archive)"
+        file: "src/data/team.json"
+        format: json
+        fields:
+          - label: "Years"
+            name: "years"
+            widget: list
+            summary: "{{fields.year}}"
+            fields:
+              - { label: "Session (e.g. 2026-27)", name: "year", widget: string }
+              - { label: "Is this the current team?", name: "current", widget: boolean, default: false }
+              - label: "Captains"
+                name: "captains"
+                widget: list
+                required: false
+                summary: "{{fields.name}} — {{fields.role}}"
+                fields:
+                  - { label: "Name", name: "name", widget: string }
+                  - { label: "Role", name: "role", widget: string }
+                  - { label: "Photo filename (upload via media library first)", name: "img", widget: string }
+                  - { label: "Card color", name: "color", widget: select, options: ["card-red", "card-purple", "card-yellow", "card-blue", "card-green"] }
+                  - { label: "LinkedIn URL", name: "linkedin", widget: string, required: false }
+              - label: "Heads"
+                name: "heads"
+                widget: list
+                required: false
+                summary: "{{fields.name}} — {{fields.role}}"
+                fields:
+                  - { label: "Name", name: "name", widget: string }
+                  - { label: "Role", name: "role", widget: string }
+                  - { label: "Photo filename (upload via media library first)", name: "img", widget: string }
+                  - { label: "Card color", name: "color", widget: select, options: ["card-red", "card-purple", "card-yellow", "card-blue", "card-green"] }
+                  - { label: "LinkedIn URL", name: "linkedin", widget: string, required: false }
+              - label: "Leads"
+                name: "leads"
+                widget: list
+                required: false
+                summary: "{{fields.name}} — {{fields.role}}"
+                fields:
+                  - { label: "Name", name: "name", widget: string }
+                  - { label: "Role", name: "role", widget: string }
+                  - { label: "Photo filename (upload via media library first)", name: "img", widget: string }
+                  - { label: "Card color", name: "color", widget: select, options: ["card-red", "card-purple", "card-yellow", "card-blue", "card-green"] }
+                  - { label: "LinkedIn URL", name: "linkedin", widget: string, required: false }
+              - label: "Coordinators"
+                name: "coordinators"
+                widget: list
+                required: false
+                summary: "{{fields.name}} — {{fields.role}}"
+                fields:
+                  - { label: "Name", name: "name", widget: string }
+                  - { label: "Role", name: "role", widget: string }
+                  - { label: "Photo filename (upload via media library first)", name: "img", widget: string }
+                  - { label: "Card color", name: "color", widget: select, options: ["card-red", "card-purple", "card-yellow", "card-blue", "card-green"] }
+                  - { label: "LinkedIn URL", name: "linkedin", widget: string, required: false }
+
+      - name: "gallery"
+        label: "Gallery Albums"
+        file: "src/data/gallery.json"
+        format: json
+        fields:
+          - label: "Albums"
+            name: "albums"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Album id (short slug, e.g. konark-2026)", name: "id", widget: string }
+              - { label: "Album title", name: "title", widget: string }
+              - label: "Images"
+                name: "images"
+                widget: list
+                summary: "{{fields.file}}"
+                fields:
+                  - { label: "Image filename (upload via media library first)", name: "file", widget: string }
+                  - { label: "Caption", name: "caption", widget: string, required: false }
+                  - { label: "Display height in px (300-700)", name: "height", widget: number, default: 400 }
+
+      - name: "faqs"
+        label: "Seed Funding FAQs"
+        file: "src/data/faqs.json"
+        format: json
+        fields:
+          - label: "FAQs"
+            name: "faqs"
+            widget: list
+            summary: "{{fields.q}}"
+            fields:
+              - { label: "Question", name: "q", widget: string }
+              - { label: "Answer", name: "a", widget: text }
+
+      - name: "journey"
+        label: "Journey Timeline (About page)"
+        file: "src/data/journey.json"
+        format: json
+        fields:
+          - label: "Milestones"
+            name: "milestones"
+            widget: list
+            summary: "{{fields.year}} — {{fields.title}}"
+            fields:
+              - { label: "Year / label", name: "year", widget: string }
+              - { label: "Title", name: "title", widget: string }
+              - { label: "Text", name: "text", widget: text }
+
+      - name: "wings"
+        label: "Wings & Departments (About page)"
+        file: "src/data/wings.json"
+        format: json
+        fields:
+          - label: "Wings"
+            name: "wings"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Wing name", name: "name", widget: string }
+              - { label: "Boxicons icon class (e.g. bx-bulb)", name: "icon", widget: string }
+              - { label: "One-line description", name: "desc", widget: string }
+
+      - name: "alumni"
+        label: "Alumni Network"
+        file: "src/data/alumni.json"
+        format: json
+        fields:
+          - { label: "Editing note", name: "_howToEdit", widget: hidden, required: false }
+          - label: "Batches"
+            name: "batches"
+            widget: list
+            summary: "{{fields.year}}"
+            fields:
+              - { label: "Batch year (e.g. 2024-25)", name: "year", widget: string }
+              - label: "Members"
+                name: "members"
+                widget: list
+                required: false
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Name", name: "name", widget: string }
+                  - { label: "Role held at iConnect", name: "role", widget: string }
+                  - { label: "Where they are now", name: "now", widget: string }
+                  - { label: "LinkedIn URL", name: "linkedin", widget: string, required: false }
+                  - { label: "Photo filename (optional)", name: "img", widget: string, required: false }

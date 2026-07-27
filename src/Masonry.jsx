@@ -69,6 +69,7 @@ const Masonry = ({
   hoverScale = 0.95,
   blurToFocus = false, // set to false to disable blur
   colorShiftOnHover = false,
+  onItemClick,
 }) => {
   const columns = useMedia(
     ["(min-width:1500px)", "(min-width:1000px)", "(min-width:600px)", "(min-width:400px)"],
@@ -203,20 +204,11 @@ const Masonry = ({
           key={item.id}
           data-key={item.id}
           className="item-wrapper"
-          onClick={() => window.open(item.url, "_blank", "noopener")}
+          onClick={() => (onItemClick ? onItemClick(item) : window.open(item.url, "_blank", "noopener"))}
           onMouseEnter={(e) => handleMouseEnter(e, item)}
           onMouseLeave={(e) => handleMouseLeave(e, item)}
         >
-          {/* <div
-            className="item-img"
-            style={{ backgroundImage: `url(${item.img})` }}
-            onClick={(e) => e.stopPropagation()} //onclick stops the page from reloading
-          >
-            {colorShiftOnHover && (
-              <div className="color-overlay" />
-            )}
-          </div> */}
-          <img className="item-img" src={item.img} alt="" loading="lazy" width={item.w} height={item.h} onClick={(e) => e.stopPropagation()}/>
+          <img className="item-img" src={item.img} alt={item.caption || ""} loading="lazy" width={item.w} height={item.h} onClick={(e) => { if (!onItemClick) e.stopPropagation(); }}/>
 
         </div>
       ))}
