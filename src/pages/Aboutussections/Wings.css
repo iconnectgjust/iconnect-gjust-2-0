@@ -59,3 +59,21 @@
   font-size: 0.92rem;
   line-height: 1.6;
 }
+
+/* Phones: 2 wings per row instead of ten stacked cards. */
+@media (max-width: 768px) {
+  .wings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ic-card-gap);
+  }
+
+  .wings-card {
+    padding: var(--ic-space-4) var(--ic-space-3);
+    border-radius: var(--ic-radius-md);
+  }
+
+  .wings-card i { font-size: 1.6rem; }
+  .wings-card h3 { font-size: 0.95rem; margin: 0.55rem 0 0.35rem; }
+  .wings-card p { font-size: var(--ic-small); line-height: 1.5; }
+  .wings-sub { margin-bottom: var(--ic-space-5); }
+}

@@ -65,3 +65,26 @@
     padding: 60px 6% 70px;
   }
 }
+
+/* Phones: 2 pillars per row so the section stays compact.
+   The 5th card spans both columns to avoid a lonely half-row. */
+@media (max-width: 768px) {
+  .five-is-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ic-card-gap);
+  }
+
+  .five-is-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .five-is-card {
+    padding: var(--ic-space-4) var(--ic-space-3);
+    border-radius: var(--ic-radius-md);
+  }
+
+  .five-is-card i { font-size: 1.7rem; }
+  .five-is-card h3 { font-size: 1rem; margin: 0.6rem 0 0.4rem; }
+  .five-is-card p { font-size: var(--ic-small); line-height: 1.5; }
+  .five-is-sub { margin-bottom: var(--ic-space-5); }
+}

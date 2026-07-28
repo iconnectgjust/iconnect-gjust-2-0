@@ -65,6 +65,7 @@ function Manageaboutus() {
       <section className="whitesec">
         <h1 className="reveal fade-up">FACULTY</h1>
 
+        <h2 className="groupheading reveal fade-up">Director</h2>
         <div className="bigcardrow">
           <div className={`bigcard ${bigMember.color} reveal fade-up delay-1`}>
             <img src={bigMember.img} alt={bigMember.name} loading="lazy" />
@@ -73,8 +74,13 @@ function Manageaboutus() {
           </div>
         </div>
 
+        <h2 className="groupheading reveal fade-up">Additional &amp; Deputy Directors</h2>
         <div className="teamrow">{directors.map(renderCard)}</div>
+
+        <h2 className="groupheading reveal fade-up">PDUIIC Coordinators</h2>
         <div className="teamrow">{pduiicCoordinators.map(renderCard)}</div>
+
+        <h2 className="groupheading reveal fade-up">Idea Lab Coordinators</h2>
         <div className="teamrow">{ideaLabCoordinators.map(renderCard)}</div>
       </section>
     </>

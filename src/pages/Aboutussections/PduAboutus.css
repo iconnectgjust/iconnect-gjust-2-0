@@ -245,3 +245,24 @@
   }
 }
 
+
+/* Body copy reads better justified; headings stay centred.
+   The ≤992px rule above centred everything, which left very
+   ragged right edges on phones. */
+.aabout-section p,
+.visioncontent p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+@media (max-width: 992px) {
+  .aabout-section p,
+  .visioncontent p {
+    text-align: justify;
+  }
+
+  .aabout-section h2,
+  .visioncontent h2 {
+    text-align: center;
+  }
+}

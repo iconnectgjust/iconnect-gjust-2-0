@@ -157,3 +157,22 @@
     width: 100%;
   }
 }
+
+/* Phones: 2 cards per row (was a single tall stack because the
+   grid's 230px minimum forced one column at phone widths). */
+@media (max-width: 768px) {
+  .whyjoin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ic-card-gap);
+    margin-bottom: var(--ic-space-5);
+  }
+
+  .whyjoin-card {
+    padding: var(--ic-space-4) var(--ic-space-3);
+    border-radius: var(--ic-radius-md);
+  }
+
+  .whyjoin-card i { font-size: 1.7rem; }
+  .whyjoin-card h3 { font-size: 1rem; margin: 0.6rem 0 0.4rem; }
+  .whyjoin-card p { font-size: var(--ic-small); line-height: 1.5; }
+}

@@ -1,0 +1,138 @@
+/* ============================================================
+   iConnect design tokens
+   A single source of truth for spacing, radius, shadow and
+   fluid type. Component styles reference these so the site
+   stays visually consistent as it grows.
+   Brand colours are intentionally unchanged.
+   ============================================================ */
+
+:root {
+  /* Brand palette (from the logo) — unchanged */
+  --ic-red: #ff0055;
+  --ic-orange: #ff9900;
+  --ic-green: #00cc88;
+  --ic-blue: #0099ff;
+  --ic-purple: #8428f1;
+  --ic-gradient: linear-gradient(90deg, #ff0055, #ff9900, #00cc88, #0099ff, #8428f1);
+
+  /* Spacing scale */
+  --ic-space-1: 0.5rem;
+  --ic-space-2: 0.75rem;
+  --ic-space-3: 1rem;
+  --ic-space-4: 1.5rem;
+  --ic-space-5: 2rem;
+  --ic-space-6: 3rem;
+
+  /* Fluid section padding — scales with the viewport, no fixed widths */
+  --ic-section-y: clamp(3.5rem, 8vw, 5.5rem);
+  --ic-section-x: clamp(1.1rem, 5vw, 4rem);
+
+  /* Card gap that tightens on small screens */
+  --ic-card-gap: clamp(0.75rem, 2.5vw, 1.4rem);
+
+  /* Radius scale */
+  --ic-radius-sm: 10px;
+  --ic-radius-md: 16px;
+  --ic-radius-lg: 22px;
+
+  /* Shadows */
+  --ic-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.18);
+  --ic-shadow-md: 0 12px 28px rgba(0, 0, 0, 0.25);
+  --ic-shadow-lg: 0 22px 45px rgba(0, 0, 0, 0.35);
+
+  /* Fluid type */
+  --ic-h1: clamp(2rem, 6vw, 3.6rem);
+  --ic-h2: clamp(1.6rem, 4.5vw, 2.6rem);
+  --ic-h3: clamp(1.05rem, 2.4vw, 1.35rem);
+  --ic-body: clamp(0.94rem, 1.6vw, 1.05rem);
+  --ic-small: clamp(0.78rem, 1.4vw, 0.92rem);
+
+  /* Motion */
+  --ic-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---- Global safety net: nothing may cause sideways scrolling ---- */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Media never overflows its container */
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+/* Long words/URLs wrap instead of pushing layout wider */
+h1, h2, h3, h4, p, li, a, span, figcaption {
+  overflow-wrap: break-word;
+}
+
+/* Visible keyboard focus for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--ic-purple);
+  outline-offset: 2px;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Reusable responsive card grid ----
+   Auto-wrapping, equal-height columns. Cards using this never
+   produce ragged rows or stretched single-column layouts. */
+.ic-grid {
+  display: grid;
+  gap: var(--ic-card-gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Two columns from the smallest phones upward, so content
+   never becomes a tall single stack. */
+@media (max-width: 768px) {
+  .ic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- Group headings (Captains / Heads / Directors ...) ----
+   Previously the About page rendered rows of people with no
+   label, so visitors could not tell which tier they were
+   looking at. The Team Archive already had these; this makes
+   the whole site consistent and improves heading hierarchy
+   for screen readers and SEO. */
+.groupheading {
+  width: 100%;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: #111;
+  margin: var(--ic-space-5) 0 var(--ic-space-3);
+}
+
+.groupheading::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 3px;
+  margin: 10px auto 0;
+  background: var(--ic-gradient);
+}

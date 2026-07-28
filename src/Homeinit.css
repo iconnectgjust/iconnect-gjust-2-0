@@ -338,3 +338,131 @@ text-underline-offset: 24.5%;
     font-size: 0.85rem;
   }
 }
+
+/* ============================================================
+   Initiative cards — professional grid treatment.
+   Before: three flex columns each stacking 2 cards, fixed
+   min-height 450px, uncontrolled image height. Cards ended up
+   different heights and images were cropped inconsistently; on
+   phones the long descriptions stretched each card enormously.
+   After: one auto-wrapping grid (equal-height rows), a fixed
+   16:10 image ratio, and descriptions hidden on phones so the
+   cards stay compact and uniform.
+   ============================================================ */
+.cardcontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: var(--ic-card-gap);
+  align-items: stretch;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 var(--ic-section-x);
+}
+
+/* Column wrappers become transparent so all cards join one grid.
+   (display:contents keeps their CSS selectors working, so the
+   per-column gradient colours are preserved.) */
+.cardcontainer > .leftcont,
+.cardcontainer > .middlecont,
+.cardcontainer > .rightcont {
+  display: contents;
+}
+
+.initcard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  padding: clamp(0.7rem, 1.6vw, 1rem);
+  border-radius: var(--ic-radius-lg);
+  transition: transform 0.3s var(--ic-ease), box-shadow 0.3s var(--ic-ease);
+}
+
+.initcard:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ic-shadow-lg);
+}
+
+/* Consistent image ratio — no more cropped or stretched artwork */
+.initimgcont {
+  width: 100%;
+  margin: 0;
+  border-radius: var(--ic-radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.initcard .initimgcont img,
+.initcard img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--ic-radius-md);
+}
+
+.initcard h2 {
+  font-size: var(--ic-h3);
+  line-height: 1.3;
+  margin: var(--ic-space-2) 0 var(--ic-space-1);
+}
+
+.initcard .initdesc {
+  font-size: var(--ic-body);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* "Learn more" always sits at the bottom edge, so every card's
+   call-to-action lines up across the row */
+.initcard .esummitlink,
+.initcard .initbtn {
+  margin-top: auto;
+  align-self: flex-end;
+  padding-top: var(--ic-space-3);
+}
+
+/* The converted <div> CTAs are now real buttons — strip UA styling */
+.initcard .initbtn {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---- Phones: two compact cards per row, headline only ---- */
+@media (max-width: 768px) {
+  .cardcontainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Descriptions hidden so cards stay short and equal.
+     Text remains in the DOM for search engines and screen
+     readers rather than being removed. */
+  .initcard .initdesc {
+    display: none;
+  }
+
+  .initcard {
+    padding: 0.55rem 0.55rem 0.7rem;
+    border-radius: var(--ic-radius-md);
+  }
+
+  .initcard h2 {
+    font-size: 1rem;
+    margin: 0.55rem 0 0.35rem;
+  }
+
+  .initcard .esummitlink,
+  .initcard .initbtn {
+    font-size: 0.85rem;
+    padding-top: var(--ic-space-1);
+    align-self: flex-start;
+  }
+}

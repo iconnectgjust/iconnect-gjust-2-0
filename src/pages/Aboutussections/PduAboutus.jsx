@@ -8,7 +8,7 @@ function pduAboutus(){
             <section className="white-aboutus">
                  <div className="aaboutcontatiner">
                           <div className="aabout-section">
-                            <h2 className="reveal slide-left delay-1">ABOUT iConnect</h2>
+                            <h2 className="reveal slide-left delay-1">About iConnect</h2>
                             <p className="reveal slide-left delay-1">
                               Team iConnect is the student organization located at the Pandit Deendayal Upadhyay Innovation & Incubation Center(PDUIIC) at GJUS&T in Hisar. We are a passionate and proactive team dedicated to bridging the gap between students and the tech-driven world. Our mission is to foster a culture of innovation, collaboration and leadership through hands-on events, workshops, and national-level competitions.
                               iConnect is run by a well-defined administrative team, an influential advisory panel, and a mentoring system.

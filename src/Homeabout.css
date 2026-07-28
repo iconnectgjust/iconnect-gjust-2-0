@@ -609,3 +609,78 @@ body {
 .about-section p {
   text-align: justify;
 }
+
+/* ============================================================
+   Authoritative responsive rules for the stats banner.
+   Earlier breakpoints left `gap: 5rem` and `margin-right: 60px`
+   applied on phones, which pushed the labels past the card edge
+   and created huge vertical gaps. These rules come last so they
+   win, and they use one consistent layout for all small screens.
+   ============================================================ */
+@media (max-width: 992px) {
+  .banner {
+    padding: clamp(1.1rem, 4vw, 2rem);
+    margin-top: var(--ic-space-6);
+    gap: var(--ic-space-3);
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .stat-box {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ic-space-3);
+    width: 100%;
+    padding: var(--ic-space-3) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .stat-box:last-child {
+    border-bottom: none;
+  }
+
+  .stat-box h2 {
+    font-size: clamp(1.7rem, 7vw, 2.6rem);
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding-bottom: 0;
+  }
+
+  /* Label wraps inside the card instead of overflowing it */
+  .stat-box p {
+    font-size: var(--ic-small);
+    line-height: 1.35;
+    text-align: right;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+  }
+
+  /* The decorative circle is clipped by the card, keep it subtle */
+  .banner::before {
+    opacity: 0.55;
+  }
+}
+
+/* Stack the label under the number only on very narrow phones */
+@media (max-width: 360px) {
+  .stat-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .stat-box p {
+    text-align: left;
+  }
+}

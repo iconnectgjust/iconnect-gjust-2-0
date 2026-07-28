@@ -26,6 +26,7 @@ function Coreteamabout() {
 
         {current.groups.map((group) => (
           <div key={group.name}>
+            <h2 className="groupheading reveal fade-up">{group.name}</h2>
             <div className={group.members.length <= 3 ? "teamrow" : "teamgrid"}>
               {group.members.map((m, i) => <TeamCard member={m} index={i} key={m.name + i} />)}
             </div>
