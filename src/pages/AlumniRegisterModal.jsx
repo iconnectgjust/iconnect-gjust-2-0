@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import Cropper from "react-easy-crop";
 import "./AlumniRegisterModal.css";
 import {
   MAX_ROLES,
   submitRegistration,
   validatePhoto,
   sendAlumniEmail,
+  cropToBlob,
 } from "../lib/alumniApi";
 
 const EMPTY = {
@@ -25,8 +27,13 @@ const EMPTY = {
 function AlumniRegisterModal({ open, onClose }) {
   const [form, setForm] = useState(EMPTY);
   const [roles, setRoles] = useState([""]);
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState(null);          // Blob that will be uploaded
   const [photoPreview, setPhotoPreview] = useState("");
+  const [cropSrc, setCropSrc] = useState("");        // data URL being cropped
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [cropPixels, setCropPixels] = useState(null);
+  const [cropping, setCropping] = useState(false);
   const [errors, setErrors] = useState({});
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
@@ -43,6 +50,11 @@ function AlumniRegisterModal({ open, onClose }) {
     setRoles([""]);
     setPhoto(null);
     setPhotoPreview("");
+    setCropSrc("");
+    setCrop({ x: 0, y: 0 });
+    setZoom(1);
+    setCropPixels(null);
+    setCropping(false);
     setErrors({});
     setBusy(false);
     setDone(false);
@@ -94,19 +106,43 @@ function AlumniRegisterModal({ open, onClose }) {
     });
   };
 
-  /* ---------- photo ---------- */
+  /* ---------- photo + manual crop ---------- */
   const onPhoto = (e) => {
     const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-picking the same file
     if (!file) return;
+
     const err = validatePhoto(file);
     if (err) {
       setErrors((er) => ({ ...er, photo: err }));
       return;
     }
-    if (photoPreview) URL.revokeObjectURL(photoPreview);
-    setPhoto(file);
-    setPhotoPreview(URL.createObjectURL(file));
     setErrors((er) => ({ ...er, photo: undefined }));
+
+    // Open the cropper so the person positions their own photo
+    const reader = new FileReader();
+    reader.onload = () => {
+      setCropSrc(String(reader.result));
+      setCrop({ x: 0, y: 0 });
+      setZoom(1);
+      setCropPixels(null);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const applyCrop = async () => {
+    if (!cropPixels) return;
+    setCropping(true);
+    try {
+      const blob = await cropToBlob(cropSrc, cropPixels);
+      if (photoPreview) URL.revokeObjectURL(photoPreview);
+      setPhoto(blob);
+      setPhotoPreview(URL.createObjectURL(blob));
+      setCropSrc("");
+    } catch (e) {
+      setErrors((er) => ({ ...er, photo: e.message }));
+    }
+    setCropping(false);
   };
 
   const clearPhoto = () => {
@@ -353,12 +389,53 @@ function AlumniRegisterModal({ open, onClose }) {
                     <input type="file" accept="image/jpeg,image/png,image/webp" hidden onChange={onPhoto} />
                   </label>
                   {photo && (
-                    <button type="button" className="alr-linkbtn" onClick={clearPhoto}>Remove</button>
+                    <>
+                      <button type="button" className="alr-linkbtn" onClick={clearPhoto}>Remove</button>
+                    </>
                   )}
-                  <small>JPG, PNG or WEBP · up to 5 MB · resized automatically</small>
+                  <small>JPG, PNG or WEBP · up to 1 MB · you choose the crop</small>
                 </div>
               </div>
               {errors.photo && <em className="alr-err">{errors.photo}</em>}
+
+              {/* Manual cropper — the applicant positions and zooms
+                  their own photo instead of an automatic centre crop. */}
+              {cropSrc && (
+                <div className="alr-cropper">
+                  <p className="alr-hint">Drag to position, and zoom to fit.</p>
+                  <div className="alr-croparea">
+                    <Cropper
+                      image={cropSrc}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={1}
+                      cropShape="round"
+                      showGrid={false}
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={(_, px) => setCropPixels(px)}
+                    />
+                  </div>
+                  <input
+                    className="alr-zoom"
+                    type="range"
+                    min="1"
+                    max="3"
+                    step="0.05"
+                    value={zoom}
+                    onChange={(e) => setZoom(Number(e.target.value))}
+                    aria-label="Zoom photo"
+                  />
+                  <div className="alr-croprow">
+                    <button type="button" className="alr-linkbtn" onClick={() => setCropSrc("")} disabled={cropping}>
+                      Cancel
+                    </button>
+                    <button type="button" className="alr-filebtn" onClick={applyCrop} disabled={cropping || !cropPixels}>
+                      {cropping ? "Applying…" : "Use this crop"}
+                    </button>
+                  </div>
+                </div>
+              )}
             </fieldset>
 
             {errors.form && <div className="alr-formerr" role="alert">{errors.form}</div>}

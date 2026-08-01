@@ -10,7 +10,7 @@
 import { supabase } from "../supabaseClient";
 
 export const MAX_ROLES = 3;
-export const MAX_PHOTO_BYTES = 5 * 1024 * 1024; // 5 MB
+export const MAX_PHOTO_BYTES = 1 * 1024 * 1024; // 1 MB
 export const ALLOWED_PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 const PHOTO_BUCKET = "alumni-photos";
@@ -114,7 +114,7 @@ export function validatePhoto(file) {
     return "Photo must be a JPG, PNG or WEBP image.";
   }
   if (file.size > MAX_PHOTO_BYTES) {
-    return "Photo must be 5 MB or smaller.";
+    return "Photo must be 1 MB or smaller.";
   }
   return "";
 }
@@ -124,9 +124,42 @@ export function validatePhoto(file) {
 /* ---------------------------------------------------------- */
 
 /**
+ * Renders a user-chosen crop region to a square JPEG.
+ * `cropPixels` comes from react-easy-crop's onCropComplete, so the
+ * person decides exactly which part of their photo is used rather
+ * than relying on an automatic centre crop.
+ */
+export function cropToBlob(imageSrc, cropPixels, size = 600) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onerror = () => reject(new Error("That file is not a readable image."));
+    img.onload = () => {
+      const out = Math.min(size, Math.round(cropPixels.width));
+      const canvas = document.createElement("canvas");
+      canvas.width = out;
+      canvas.height = out;
+      const ctx = canvas.getContext("2d");
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(
+        img,
+        cropPixels.x, cropPixels.y, cropPixels.width, cropPixels.height,
+        0, 0, out, out
+      );
+      canvas.toBlob(
+        (blob) => (blob ? resolve(blob) : reject(new Error("Image processing failed."))),
+        "image/jpeg",
+        0.85
+      );
+    };
+    img.src = imageSrc;
+  });
+}
+
+/**
  * Downscales and re-encodes an image in the browser before upload:
  * square crop, max 600px, JPEG q0.85. Keeps storage small and
  * strips EXIF metadata (including GPS) as a privacy benefit.
+ * Used as the fallback when no manual crop was made.
  */
 export function optimiseImage(file, size = 600) {
   return new Promise((resolve, reject) => {
@@ -185,9 +218,11 @@ export async function submitRegistration(form, photoFile) {
   if (photoError) errors.photo = photoError;
   if (Object.keys(errors).length) return { ok: false, errors };
 
+  // photoFile may already be a cropped Blob produced by the manual
+  // cropper; only raw Files still need the automatic centre crop.
   let photo_url = "";
   if (photoFile) {
-    const blob = await optimiseImage(photoFile);
+    const blob = photoFile instanceof File ? await optimiseImage(photoFile) : photoFile;
     photo_url = await uploadPhoto(blob, "submissions");
   }
 

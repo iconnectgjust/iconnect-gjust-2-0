@@ -133,10 +133,10 @@ create policy "alumni admin all" on alumni_profiles
 
 -- ---------- STORAGE ----------
 -- Dedicated bucket so anonymous uploads never touch the main media bucket.
--- 5 MB cap and image-only MIME types are enforced by storage itself.
+-- 1 MB cap and image-only MIME types are enforced by storage itself.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values (
-  'alumni-photos', 'alumni-photos', true, 5242880,
+  'alumni-photos', 'alumni-photos', true, 1048576,
   array['image/jpeg','image/png','image/webp']
 )
 on conflict (id) do update

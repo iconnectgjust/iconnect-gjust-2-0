@@ -373,3 +373,32 @@
   }
   .alr-row { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* ---- manual cropper ---- */
+.alr-cropper {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.alr-croparea {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.alr-zoom {
+  width: 100%;
+  margin: 12px 0 4px;
+  accent-color: #8428f1;
+}
+
+.alr-croprow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
