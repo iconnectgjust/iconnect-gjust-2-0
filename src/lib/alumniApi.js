@@ -206,11 +206,11 @@ export async function submitRegistration(form, photoFile) {
     source: "public",
   };
 
-  const { data, error } = await supabase
-    .from("alumni_profiles")
-    .insert(row)
-    .select("id, full_name, email")
-    .single();
+  // Deliberately no .select() here. Reading the row back would make
+  // PostgREST run a SELECT as the anonymous role, which the public read
+  // policy (correctly) denies for pending profiles — that would abort the
+  // whole insert. The caller only needs to know it succeeded.
+  const { error } = await supabase.from("alumni_profiles").insert(row);
 
   if (error) {
     if (error.code === DUPLICATE_CODE) {
@@ -222,7 +222,7 @@ export async function submitRegistration(form, photoFile) {
     return { ok: false, errors: { form: error.message } };
   }
 
-  return { ok: true, data };
+  return { ok: true, data: { full_name: row.full_name, email: row.email } };
 }
 
 /* ---------------------------------------------------------- */
