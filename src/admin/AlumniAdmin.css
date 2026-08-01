@@ -1,0 +1,251 @@
+/* Alumni Management — extends the shared admin styles in Admin.css */
+
+.alad-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.alad-head h2 { margin: 0; }
+
+.alad-toast {
+  background: rgba(63, 185, 80, 0.12);
+  border: 1px solid rgba(63, 185, 80, 0.35);
+  border-radius: 10px;
+  padding: 9px 14px;
+}
+
+/* ---- tabs + search ---- */
+.alad-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.alad-tab {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--adm-border);
+  color: var(--adm-mut);
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.alad-tab span {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1px 8px;
+  font-size: 0.76rem;
+}
+
+.alad-tab:hover { color: var(--adm-text); }
+
+.alad-tab-on {
+  background: var(--adm-grad);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+.alad-tab-on span { background: rgba(0, 0, 0, 0.25); }
+
+.alad-search {
+  flex: 1 1 240px;
+  min-width: 180px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--adm-border2);
+  color: var(--adm-text);
+  border-radius: 30px;
+  padding: 9px 16px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.alad-search:focus {
+  border-color: #8428f1;
+  box-shadow: 0 0 0 3px rgba(132, 40, 241, 0.2);
+}
+
+/* ---- bulk bar ---- */
+.alad-bulk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: rgba(132, 40, 241, 0.1);
+  border: 1px solid rgba(132, 40, 241, 0.35);
+  border-radius: 12px;
+  padding: 11px 15px;
+  margin-bottom: 1rem;
+}
+
+.alad-bulk strong { margin-right: 6px; font-size: 0.9rem; }
+
+/* ---- table ---- */
+.alad-tablewrap {
+  overflow-x: auto;
+  border: 1px solid var(--adm-border);
+  border-radius: 14px;
+  background: var(--adm-panel);
+}
+
+.alad-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 1050px;
+}
+
+.alad-table th,
+.alad-table td {
+  text-align: left;
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--adm-border);
+  vertical-align: middle;
+}
+
+.alad-table th {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--adm-mut);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.alad-table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+.alad-rowsel { background: rgba(132, 40, 241, 0.08) !important; }
+.alad-table tr:last-child td { border-bottom: none; }
+
+.alad-check { width: 34px; }
+.alad-check input { width: 16px; height: 16px; accent-color: #8428f1; cursor: pointer; }
+
+.alad-photo {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.alad-nophoto {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed var(--adm-border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--adm-mut);
+}
+
+.alad-mono { font-size: 0.8rem; color: var(--adm-mut); }
+.alad-nowrap { white-space: nowrap; }
+
+.alad-src,
+.alad-view {
+  display: block;
+  font-size: 0.7rem;
+  margin-top: 2px;
+}
+
+.alad-src { color: var(--adm-mut); }
+.alad-view { color: #4aa8ff; }
+
+.alad-roles { display: flex; flex-wrap: wrap; gap: 4px; max-width: 210px; }
+
+.alad-role {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--adm-border);
+  white-space: nowrap;
+}
+
+.alad-role-1 {
+  background: rgba(132, 40, 241, 0.22);
+  border-color: rgba(132, 40, 241, 0.45);
+  font-weight: 600;
+}
+
+.alad-status {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.alad-status-pending  { background: rgba(255, 153, 0, 0.18);  color: #ffc266; border: 1px solid rgba(255,153,0,0.4); }
+.alad-status-approved { background: rgba(0, 204, 136, 0.16);  color: #5ce0ab; border: 1px solid rgba(0,204,136,0.4); }
+.alad-status-rejected { background: rgba(220, 55, 45, 0.16);  color: #ff8a80; border: 1px solid rgba(220,55,45,0.4); }
+
+.alad-hidden {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--adm-mut);
+  margin-top: 3px;
+}
+
+.alad-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 230px;
+}
+
+.alad-actions .admin-btn {
+  padding: 6px 11px;
+  font-size: 0.78rem;
+  border-radius: 8px;
+}
+
+.alad-filebtn { cursor: pointer; margin: 0; }
+
+/* ---- role editor inside the modal ---- */
+.alad-rolerow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+
+.alad-rolerow span {
+  flex: 0 0 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--adm-mut);
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alad-rolerow input {
+  flex: 1;
+  min-width: 0;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .alad-head { flex-direction: column; align-items: stretch; }
+  .alad-head .admin-btn { width: 100%; }
+}

@@ -20,6 +20,7 @@ const AboutusPage = lazy(() => import('./pages/Aboutus'));
 const SeedFundingPage = lazy(() => import('./pages/SeedFunding'));
 const TeamPage = lazy(() => import('./pages/Team'));
 const AlumniPage = lazy(() => import('./pages/Alumni'));
+const AlumniProfilePage = lazy(() => import('./pages/AlumniProfile'));
 const PduiicPage = lazy(() => import('./pages/Pduiic'));
 const ContactPage = lazy(() => import('./pages/Contact'));
 const GalleryPage = lazy(() => import('./pages/Gallery'));
@@ -109,6 +110,7 @@ function App() {
           <Route path="/team" element={<><Navbar /><TeamPage /><Homefooter /></>} />
           <Route path="/team/:year" element={<><Navbar /><TeamPage /><Homefooter /></>} />
           <Route path="/alumni" element={<><Navbar /><AlumniPage /><Homefooter /></>} />
+          <Route path="/alumni/:slug" element={<><Navbar /><AlumniProfilePage /><Homefooter /></>} />
           <Route path="/pduiic" element={<><Navbar /><PduiicPage /></>} />
           <Route path="/contact" element={<><Navbar /><ContactPage /></>} />
           <Route path="/gallery" element={<><Navbar /><GalleryPage /></>} />

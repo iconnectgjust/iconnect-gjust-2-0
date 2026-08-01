@@ -1,145 +1,464 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient";
-import { uploadMedia, swapSort } from "./adminApi";
-import PhotoCropper from "./PhotoCropper";
+import { useEffect, useMemo, useState } from "react";
+import "./AlumniAdmin.css";
+import {
+  MAX_ROLES,
+  fetchAllAlumni,
+  updateAlumni,
+  setStatus as apiSetStatus,
+  setHidden as apiSetHidden,
+  deleteAlumni as apiDelete,
+  createAlumniAsAdmin,
+  replacePhoto,
+  sendAlumniEmail,
+  validateAlumni,
+  csvCell,
+} from "../lib/alumniApi";
 
-const emptyAlum = { name: "", role: "", now_at: "", linkedin: "", photo_url: "" };
+const STATUS_TABS = [
+  { id: "all", label: "All" },
+  { id: "pending", label: "Pending" },
+  { id: "approved", label: "Approved" },
+  { id: "rejected", label: "Rejected" },
+];
+
+const BLANK = {
+  full_name: "", email: "", contact: "", roles: [""],
+  current_organization: "", current_designation: "", linkedin: "", summary: "",
+};
+
+const fmtDate = (iso) =>
+  iso ? new Date(iso).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "—";
+
+function download(filename, content, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 function AlumniAdmin() {
-  const [batches, setBatches] = useState([]);
-  const [newYear, setNewYear] = useState("");
-  const [edit, setEdit] = useState(null); // {batchId, member|null, draft}
-  const [cropSrc, setCropSrc] = useState(null);
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState("all");
+  const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState(() => new Set());
+  const [editing, setEditing] = useState(null); // row being edited, or "new"
+  const [draft, setDraft] = useState(BLANK);
+  const [draftErrors, setDraftErrors] = useState({});
+  const [photoRow, setPhotoRow] = useState(null); // row id awaiting a new photo
   const [busy, setBusy] = useState(false);
+  const [toast, setToast] = useState("");
   const [err, setErr] = useState("");
 
+  const notify = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 3200);
+  };
+
   const load = async () => {
-    const { data, error } = await supabase
-      .from("alumni_batches")
-      .select("*, alumni_members(*)")
-      .order("sort", { ascending: false });
-    if (error) setErr(error.message);
-    else setBatches(data.map((b) => ({ ...b, alumni_members: b.alumni_members.sort((a, c) => a.sort - c.sort) })));
+    setLoading(true);
+    try {
+      setRows(await fetchAllAlumni());
+      setErr("");
+    } catch (e) {
+      setErr(e.message);
+    }
+    setLoading(false);
   };
   useEffect(() => { load(); }, []);
 
-  const addBatch = async () => {
-    if (!newYear.trim()) return;
-    const sort = (batches[0]?.sort ?? 0) + 1;
-    const { error } = await supabase.from("alumni_batches").insert({ year: newYear.trim(), sort });
-    if (error) setErr(error.message); else { setNewYear(""); await load(); }
-  };
+  /* ---------------- filtering ---------------- */
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return rows.filter((r) => {
+      if (tab !== "all" && r.status !== tab) return false;
+      if (!q) return true;
+      return [r.full_name, r.email, r.contact, r.current_organization, r.current_designation, ...(r.roles || [])]
+        .join(" ").toLowerCase().includes(q);
+    });
+  }, [rows, tab, query]);
 
-  const deleteBatch = async (b) => {
-    if (!confirm(`Delete batch ${b.year} and its ${b.alumni_members.length} member(s)?`)) return;
-    const { error } = await supabase.from("alumni_batches").delete().eq("id", b.id);
-    if (error) setErr(error.message); else await load();
-  };
+  const counts = useMemo(() => ({
+    all: rows.length,
+    pending: rows.filter((r) => r.status === "pending").length,
+    approved: rows.filter((r) => r.status === "approved").length,
+    rejected: rows.filter((r) => r.status === "rejected").length,
+  }), [rows]);
 
-  const deleteMember = async (m) => {
-    if (!confirm(`Remove ${m.name}?`)) return;
-    const { error } = await supabase.from("alumni_members").delete().eq("id", m.id);
-    if (error) setErr(error.message); else await load();
+  /* ---------------- selection ---------------- */
+  const allShownSelected = filtered.length > 0 && filtered.every((r) => selected.has(r.id));
+  const toggleAll = () => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (allShownSelected) filtered.forEach((r) => next.delete(r.id));
+      else filtered.forEach((r) => next.add(r.id));
+      return next;
+    });
   };
-
-  const moveMember = async (b, idx, dir) => {
-    const other = b.alumni_members[idx + dir];
-    if (!other) return;
-    await swapSort("alumni_members", b.alumni_members[idx], other);
-    await load();
+  const toggleOne = (id) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
   };
+  const selectedIds = [...selected].filter((id) => rows.some((r) => r.id === id));
 
-  const save = async () => {
-    const { batchId, member, draft } = edit;
-    if (!draft.name.trim()) { setErr("Name is required"); return; }
+  /* ---------------- actions ---------------- */
+  const runAction = async (fn, successMsg) => {
     setBusy(true); setErr("");
-    let error;
-    if (member) ({ error } = await supabase.from("alumni_members").update(draft).eq("id", member.id));
-    else {
-      const b = batches.find((x) => x.id === batchId);
-      const sort = (b.alumni_members[b.alumni_members.length - 1]?.sort ?? -1) + 1;
-      ({ error } = await supabase.from("alumni_members").insert({ ...draft, batch_id: batchId, sort }));
-    }
-    if (error) setErr(error.message); else { setEdit(null); await load(); }
-    setBusy(false);
-  };
-
-  const onPhotoPicked = (file) => {
-    const reader = new FileReader();
-    reader.onload = () => setCropSrc(reader.result);
-    reader.readAsDataURL(file);
-  };
-
-  const onCropDone = async (blob) => {
-    setCropSrc(null); setBusy(true);
     try {
-      const url = await uploadMedia("alumni", blob);
-      setEdit((e) => ({ ...e, draft: { ...e.draft, photo_url: url } }));
-    } catch (e) { setErr(e.message); }
+      await fn();
+      await load();
+      notify(successMsg);
+    } catch (e) {
+      setErr(e.message);
+    }
     setBusy(false);
   };
 
+  const approve = (ids) =>
+    runAction(async () => {
+      await apiSetStatus(ids, "approved");
+      // Approval emails are best-effort; failures never block the action.
+      const targets = rows.filter((r) => ids.includes(r.id));
+      await Promise.all(targets.map((r) => sendAlumniEmail("approved", r)));
+    }, ids.length > 1 ? `${ids.length} profiles approved` : "Profile approved");
+
+  const reject = (ids) => runAction(() => apiSetStatus(ids, "rejected"),
+    ids.length > 1 ? `${ids.length} profiles rejected` : "Profile rejected");
+
+  const hide = (ids, hidden) => runAction(() => apiSetHidden(ids, hidden),
+    hidden ? "Hidden from the public directory" : "Visible in the public directory");
+
+  const remove = (ids) => {
+    const msg = ids.length > 1
+      ? `Delete ${ids.length} alumni profiles permanently? This cannot be undone.`
+      : "Delete this alumni profile permanently? This cannot be undone.";
+    if (!confirm(msg)) return;
+    runAction(async () => {
+      await apiDelete(ids);
+      setSelected(new Set());
+    }, ids.length > 1 ? `${ids.length} profiles deleted` : "Profile deleted");
+  };
+
+  const resendEmail = (row) =>
+    runAction(async () => {
+      const kind = row.status === "approved" ? "approved" : "registered";
+      const res = await sendAlumniEmail(kind, row);
+      if (res.skipped) throw new Error("Email service is not configured yet — see supabase/functions/alumni-email/README.md");
+    }, "Email sent");
+
+  /* ---------------- editing ---------------- */
+  const openEdit = (row) => {
+    setEditing(row);
+    setDraft({
+      full_name: row.full_name, email: row.email, contact: row.contact,
+      roles: row.roles?.length ? [...row.roles] : [""],
+      current_organization: row.current_organization,
+      current_designation: row.current_designation,
+      linkedin: row.linkedin, summary: row.summary || "",
+    });
+    setDraftErrors({});
+  };
+
+  const openNew = () => { setEditing("new"); setDraft(BLANK); setDraftErrors({}); };
+
+  const setDraftField = (k) => (e) => setDraft((d) => ({ ...d, [k]: e.target.value }));
+  const setDraftRole = (i, v) => setDraft((d) => ({ ...d, roles: d.roles.map((r, idx) => (idx === i ? v : r)) }));
+  const addDraftRole = () => setDraft((d) => (d.roles.length < MAX_ROLES ? { ...d, roles: [...d.roles, ""] } : d));
+  const removeDraftRole = (i) => setDraft((d) => (d.roles.length > 1 ? { ...d, roles: d.roles.filter((_, idx) => idx !== i) } : d));
+  const moveDraftRole = (i, dir) => setDraft((d) => {
+    const next = [...d.roles]; const j = i + dir;
+    if (j < 0 || j >= next.length) return d;
+    [next[i], next[j]] = [next[j], next[i]];
+    return { ...d, roles: next };
+  });
+
+  const saveDraft = async () => {
+    const errors = validateAlumni(draft, { requireContact: false });
+    if (Object.keys(errors).length) { setDraftErrors(errors); return; }
+    setBusy(true); setErr("");
+    try {
+      if (editing === "new") {
+        const res = await createAlumniAsAdmin(draft, null);
+        if (!res.ok) { setDraftErrors(res.errors); setBusy(false); return; }
+        notify("Alumni added");
+      } else {
+        await updateAlumni(editing.id, {
+          full_name: draft.full_name,
+          email: draft.email.toLowerCase(),
+          contact: draft.contact,
+          roles: draft.roles.map((r) => r.trim()).filter(Boolean),
+          current_organization: draft.current_organization,
+          current_designation: draft.current_designation,
+          linkedin: draft.linkedin,
+          summary: draft.summary,
+        });
+        notify("Changes saved");
+      }
+      setEditing(null);
+      await load();
+    } catch (e) {
+      setDraftErrors({ form: e.message });
+    }
+    setBusy(false);
+  };
+
+  const onPhotoPicked = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !photoRow) return;
+    await runAction(() => replacePhoto(photoRow, file), "Photo updated");
+    setPhotoRow(null);
+  };
+
+  /* ---------------- exports ---------------- */
+  const exportRows = () => (selectedIds.length
+    ? rows.filter((r) => selectedIds.includes(r.id))
+    : filtered);
+
+  const HEADERS = ["Name", "Email", "Contact", "Roles", "Organization", "Designation", "LinkedIn", "Status", "Visible", "Submitted", "Approved"];
+  const rowValues = (r) => [
+    r.full_name, r.email, r.contact, (r.roles || []).join(" | "),
+    r.current_organization, r.current_designation, r.linkedin,
+    r.status, r.is_hidden ? "Hidden" : "Visible",
+    fmtDate(r.submitted_at), fmtDate(r.approved_at),
+  ];
+
+  const exportCSV = () => {
+    const data = exportRows();
+    const csv = [HEADERS.map(csvCell).join(","), ...data.map((r) => rowValues(r).map(csvCell).join(","))].join("\r\n");
+    download(`iconnect-alumni-${Date.now()}.csv`, "﻿" + csv, "text/csv;charset=utf-8");
+    notify(`Exported ${data.length} rows to CSV`);
+  };
+
+  const exportExcel = () => {
+    const data = exportRows();
+    const esc = (v) => String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const html =
+      `<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body><table border="1">` +
+      `<tr>${HEADERS.map((h) => `<th>${esc(h)}</th>`).join("")}</tr>` +
+      data.map((r) => `<tr>${rowValues(r).map((v) => `<td>${esc(v)}</td>`).join("")}</tr>`).join("") +
+      `</table></body></html>`;
+    download(`iconnect-alumni-${Date.now()}.xls`, html, "application/vnd.ms-excel");
+    notify(`Exported ${data.length} rows to Excel`);
+  };
+
+  /* ---------------- render ---------------- */
   return (
-    <div>
-      <h2>Alumni Network</h2>
-      {err && <p className="admin-err">{err}</p>}
-      <div className="admin-addrow">
-        <input placeholder="New batch, e.g. 2024-25" value={newYear} onChange={(e) => setNewYear(e.target.value)} />
-        <button className="admin-btn" onClick={addBatch}>+ Add batch</button>
+    <div className="alad">
+      <div className="alad-head">
+        <h2>Alumni Management</h2>
+        <span className="admin-spacer" />
+        <button className="admin-btn admin-btn-ghost" onClick={openNew}>+ Add alumni</button>
+        <button className="admin-btn admin-btn-ghost" onClick={exportCSV} disabled={!filtered.length}>Export CSV</button>
+        <button className="admin-btn admin-btn-ghost" onClick={exportExcel} disabled={!filtered.length}>Export Excel</button>
       </div>
 
-      {batches.map((b) => (
-        <div className="admin-group" key={b.id}>
-          <div className="admin-grouphead">
-            <h3>Batch {b.year}</h3>
-            <span className="admin-spacer" />
-            <button className="admin-btn admin-btn-ghost" onClick={() => setEdit({ batchId: b.id, member: null, draft: { ...emptyAlum } })}>+ Add alum</button>
-            <button className="admin-btn admin-btn-danger" onClick={() => deleteBatch(b)}>Delete batch</button>
-          </div>
-          <div className="admin-memberlist">
-            {b.alumni_members.map((m, mi) => (
-              <div className="admin-membercard" key={m.id}>
-                {m.photo_url ? <img src={m.photo_url} alt={m.name} /> : <div className="admin-nophoto">no photo</div>}
-                <div className="admin-memberinfo">
-                  <strong>{m.name}</strong>
-                  <span>{m.role} → {m.now_at}</span>
-                </div>
-                <button className="admin-iconbtn" onClick={() => moveMember(b, mi, -1)} disabled={mi === 0}>↑</button>
-                <button className="admin-iconbtn" onClick={() => moveMember(b, mi, 1)} disabled={mi === b.alumni_members.length - 1}>↓</button>
-                <button className="admin-btn admin-btn-ghost" onClick={() => setEdit({ batchId: b.id, member: m, draft: { name: m.name, role: m.role, now_at: m.now_at, linkedin: m.linkedin, photo_url: m.photo_url } })}>Edit</button>
-                <button className="admin-btn admin-btn-danger" onClick={() => deleteMember(m)}>✕</button>
-              </div>
-            ))}
-            {!b.alumni_members.length && <p className="admin-muted">No alumni in this batch yet.</p>}
-          </div>
-        </div>
-      ))}
-      {!batches.length && <p className="admin-muted">No batches yet — add one above.</p>}
+      {err && <p className="admin-err">{err}</p>}
+      {toast && <p className="admin-ok alad-toast" role="status">{toast}</p>}
 
-      {edit && (
+      <div className="alad-tabs">
+        {STATUS_TABS.map((t) => (
+          <button
+            key={t.id}
+            className={`alad-tab ${tab === t.id ? "alad-tab-on" : ""}`}
+            onClick={() => setTab(t.id)}
+          >
+            {t.label} <span>{counts[t.id]}</span>
+          </button>
+        ))}
+        <input
+          className="alad-search"
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search name, email, role, company…"
+          aria-label="Search alumni"
+        />
+      </div>
+
+      {selectedIds.length > 0 && (
+        <div className="alad-bulk">
+          <strong>{selectedIds.length} selected</strong>
+          <button className="admin-btn" onClick={() => approve(selectedIds)} disabled={busy}>Approve</button>
+          <button className="admin-btn admin-btn-ghost" onClick={() => reject(selectedIds)} disabled={busy}>Reject</button>
+          <button className="admin-btn admin-btn-ghost" onClick={() => hide(selectedIds, true)} disabled={busy}>Hide</button>
+          <button className="admin-btn admin-btn-ghost" onClick={() => hide(selectedIds, false)} disabled={busy}>Unhide</button>
+          <button className="admin-btn admin-btn-danger" onClick={() => remove(selectedIds)} disabled={busy}>Delete</button>
+          <button className="admin-btn admin-btn-ghost" onClick={() => setSelected(new Set())}>Clear</button>
+        </div>
+      )}
+
+      {loading ? (
+        <p className="admin-muted">Loading alumni…</p>
+      ) : filtered.length === 0 ? (
+        <p className="admin-muted">
+          {rows.length === 0
+            ? "No alumni registrations yet. Public submissions from /alumni will appear here."
+            : "No alumni match this filter."}
+        </p>
+      ) : (
+        <div className="alad-tablewrap">
+          <table className="alad-table">
+            <thead>
+              <tr>
+                <th className="alad-check">
+                  <input
+                    type="checkbox"
+                    checked={allShownSelected}
+                    onChange={toggleAll}
+                    aria-label="Select all shown"
+                  />
+                </th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Roles</th>
+                <th>Organization</th>
+                <th>Designation</th>
+                <th>Submitted</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((r) => (
+                <tr key={r.id} className={selected.has(r.id) ? "alad-rowsel" : ""}>
+                  <td className="alad-check">
+                    <input
+                      type="checkbox"
+                      checked={selected.has(r.id)}
+                      onChange={() => toggleOne(r.id)}
+                      aria-label={`Select ${r.full_name}`}
+                    />
+                  </td>
+                  <td>
+                    {r.photo_url ? (
+                      <a href={r.photo_url} target="_blank" rel="noopener noreferrer" title="View full image">
+                        <img className="alad-photo" src={r.photo_url} alt={r.full_name} />
+                      </a>
+                    ) : (
+                      <div className="alad-nophoto">—</div>
+                    )}
+                  </td>
+                  <td>
+                    <strong>{r.full_name}</strong>
+                    {r.source === "admin" && <span className="alad-src">added by admin</span>}
+                    {r.status === "approved" && !r.is_hidden && (
+                      <a className="alad-view" href={`/alumni/${r.slug}`} target="_blank" rel="noopener noreferrer">view public page</a>
+                    )}
+                  </td>
+                  <td className="alad-mono">{r.email}</td>
+                  <td className="alad-mono">{r.contact || "—"}</td>
+                  <td>
+                    <div className="alad-roles">
+                      {(r.roles || []).map((role, i) => (
+                        <span key={role + i} className={i === 0 ? "alad-role alad-role-1" : "alad-role"}>{role}</span>
+                      ))}
+                    </div>
+                  </td>
+                  <td>{r.current_organization || "—"}</td>
+                  <td>{r.current_designation || "—"}</td>
+                  <td className="alad-nowrap">{fmtDate(r.submitted_at)}</td>
+                  <td>
+                    <span className={`alad-status alad-status-${r.status}`}>{r.status}</span>
+                    {r.status === "approved" && r.is_hidden && <span className="alad-hidden">hidden</span>}
+                  </td>
+                  <td>
+                    <div className="alad-actions">
+                      {r.status !== "approved" && (
+                        <button className="admin-btn" onClick={() => approve([r.id])} disabled={busy}>Approve</button>
+                      )}
+                      {r.status !== "rejected" && (
+                        <button className="admin-btn admin-btn-ghost" onClick={() => reject([r.id])} disabled={busy}>Reject</button>
+                      )}
+                      {r.status === "approved" && (
+                        <button className="admin-btn admin-btn-ghost" onClick={() => hide([r.id], !r.is_hidden)} disabled={busy}>
+                          {r.is_hidden ? "Unhide" : "Hide"}
+                        </button>
+                      )}
+                      <button className="admin-btn admin-btn-ghost" onClick={() => openEdit(r)}>Edit</button>
+                      <label className="admin-btn admin-btn-ghost alad-filebtn">
+                        Photo
+                        <input type="file" accept="image/jpeg,image/png,image/webp" hidden
+                          onClick={() => setPhotoRow(r.id)} onChange={onPhotoPicked} />
+                      </label>
+                      <button className="admin-btn admin-btn-ghost" onClick={() => resendEmail(r)} disabled={busy}>Resend</button>
+                      <button className="admin-btn admin-btn-danger" onClick={() => remove([r.id])} disabled={busy}>✕</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* ---------- edit / add modal ---------- */}
+      {editing && (
         <div className="admin-modal">
           <div className="admin-modal-box">
-            <h3>{edit.member ? `Edit ${edit.member.name}` : "Add alum"}</h3>
-            <label>Name<input value={edit.draft.name} onChange={(e) => setEdit({ ...edit, draft: { ...edit.draft, name: e.target.value } })} /></label>
-            <label>Role held at iConnect<input value={edit.draft.role} onChange={(e) => setEdit({ ...edit, draft: { ...edit.draft, role: e.target.value } })} /></label>
-            <label>Where they are now<input value={edit.draft.now_at} onChange={(e) => setEdit({ ...edit, draft: { ...edit.draft, now_at: e.target.value } })} placeholder="e.g. SDE at Infosys / Founder, XYZ" /></label>
-            <label>LinkedIn URL<input value={edit.draft.linkedin} onChange={(e) => setEdit({ ...edit, draft: { ...edit.draft, linkedin: e.target.value } })} /></label>
-            <div className="admin-photorow">
-              {edit.draft.photo_url ? <img src={edit.draft.photo_url} alt="preview" /> : <div className="admin-nophoto">no photo</div>}
-              <label className="admin-btn admin-btn-ghost admin-filebtn">
-                {edit.draft.photo_url ? "Change photo…" : "Upload photo…"}
-                <input type="file" accept="image/*" hidden onChange={(e) => e.target.files[0] && onPhotoPicked(e.target.files[0])} />
-              </label>
-            </div>
+            <h3>{editing === "new" ? "Add alumni" : `Edit ${editing.full_name}`}</h3>
+
+            <label>Full name
+              <input value={draft.full_name} onChange={setDraftField("full_name")} />
+            </label>
+            {draftErrors.full_name && <p className="admin-err">{draftErrors.full_name}</p>}
+
+            <label>Email
+              <input type="email" value={draft.email} onChange={setDraftField("email")} />
+            </label>
+            {draftErrors.email && <p className="admin-err">{draftErrors.email}</p>}
+
+            <label>Contact
+              <input value={draft.contact} onChange={setDraftField("contact")} />
+            </label>
+            {draftErrors.contact && <p className="admin-err">{draftErrors.contact}</p>}
+
+            <label>Roles at iConnect (first = primary)</label>
+            {draft.roles.map((role, i) => (
+              <div className="alad-rolerow" key={i}>
+                <span>{i + 1}</span>
+                <input value={role} onChange={(e) => setDraftRole(i, e.target.value)} />
+                <button className="admin-iconbtn" onClick={() => moveDraftRole(i, -1)} disabled={i === 0}>↑</button>
+                <button className="admin-iconbtn" onClick={() => moveDraftRole(i, 1)} disabled={i === draft.roles.length - 1}>↓</button>
+                <button className="admin-iconbtn" onClick={() => removeDraftRole(i)} disabled={draft.roles.length === 1}>✕</button>
+              </div>
+            ))}
+            {draft.roles.length < MAX_ROLES && (
+              <button className="admin-btn admin-btn-ghost" onClick={addDraftRole}>+ Add role</button>
+            )}
+            {draftErrors.roles && <p className="admin-err">{draftErrors.roles}</p>}
+
+            <label>Organization
+              <input value={draft.current_organization} onChange={setDraftField("current_organization")} />
+            </label>
+            <label>Designation
+              <input value={draft.current_designation} onChange={setDraftField("current_designation")} />
+            </label>
+            <label>LinkedIn
+              <input value={draft.linkedin} onChange={setDraftField("linkedin")} />
+            </label>
+            {draftErrors.linkedin && <p className="admin-err">{draftErrors.linkedin}</p>}
+
+            <label>Summary
+              <textarea rows={3} value={draft.summary} onChange={setDraftField("summary")} />
+            </label>
+
+            {draftErrors.form && <p className="admin-err">{draftErrors.form}</p>}
+
             <div className="admin-row-end">
-              <button className="admin-btn admin-btn-ghost" onClick={() => setEdit(null)} disabled={busy}>Cancel</button>
-              <button className="admin-btn" onClick={save} disabled={busy}>{busy ? "Saving…" : "Save"}</button>
+              <button className="admin-btn admin-btn-ghost" onClick={() => setEditing(null)} disabled={busy}>Cancel</button>
+              <button className="admin-btn" onClick={saveDraft} disabled={busy}>{busy ? "Saving…" : "Save"}</button>
             </div>
           </div>
         </div>
       )}
-
-      {cropSrc && <PhotoCropper src={cropSrc} onDone={onCropDone} onCancel={() => setCropSrc(null)} />}
     </div>
   );
 }

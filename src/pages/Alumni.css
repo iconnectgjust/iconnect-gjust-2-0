@@ -6,123 +6,408 @@
   font-family: "Roboto", sans-serif;
 }
 
+/* ---------- hero ---------- */
 .alumnipage-hero {
   text-align: center;
-  padding: 80px 6% 40px;
+  padding: var(--ic-section-y) var(--ic-section-x) 3rem;
 }
 
 .alumnipage-hero h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-size: var(--ic-h1);
   font-weight: 800;
   letter-spacing: 2px;
-  background: linear-gradient(90deg, #ff0055, #ff9900, #00cc88, #0099ff, #8428f1);
+  background: var(--ic-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.alumnipage-hero p {
+.alumnipage-hero > p {
   color: #aaa;
   margin-top: 14px;
-  font-size: 1.05rem;
+  font-size: var(--ic-body);
 }
 
-.alumnipage-empty {
-  text-align: center;
-  padding: 40px 6% 120px;
-  max-width: 560px;
-  margin: 0 auto;
-}
-
-.alumnipage-empty i {
-  font-size: 4rem;
-  color: #8428f1;
-}
-
-.alumnipage-empty h2 {
-  margin: 18px 0 12px;
-  font-size: 1.6rem;
-}
-
-.alumnipage-empty p {
-  color: #aaa;
-  line-height: 1.7;
-}
-
-.alumnipage-cta {
+.al-cta {
   display: inline-block;
-  margin-top: 26px;
+  margin-top: 1.8rem;
   padding: 14px 34px;
+  border: none;
   border-radius: 40px;
   background: linear-gradient(135deg, #ff0055, #8428f1);
   color: #fff;
-  text-decoration: none;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.15s var(--ic-ease), box-shadow 0.15s var(--ic-ease);
 }
 
-.alumnipage-alt {
-  margin-top: 26px;
-  font-size: 0.95rem;
+.al-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(132, 40, 241, 0.42);
 }
 
-.alumnipage-alt a {
-  color: #ff9900;
+.al-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 6vw, 4rem);
+  margin-top: 2.8rem;
 }
 
-.alumnipage-batch {
-  padding: 30px 6% 60px;
-  max-width: 1250px;
+.al-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.al-stats strong {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 800;
+  background: var(--ic-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.al-stats span {
+  color: #8b8b95;
+  font-size: var(--ic-small);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ---------- about ---------- */
+.al-about {
+  max-width: 860px;
   margin: 0 auto;
-}
-
-.alumnipage-batch h2 {
-  font-size: 1.6rem;
-  margin-bottom: 26px;
-  border-left: 4px solid #ff9900;
-  padding-left: 14px;
-}
-
-.alumnipage-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-.alumnipage-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 26px 22px;
+  padding: 0 var(--ic-section-x) var(--ic-section-y);
   text-align: center;
 }
 
-.alumnipage-card img {
-  width: 92px;
-  height: 92px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 14px;
+.al-about h2,
+.al-why h2,
+.al-directory h2 {
+  font-size: var(--ic-h2);
+  font-weight: 800;
+  margin-bottom: var(--ic-space-4);
 }
 
-.alumnipage-card h3 {
+.al-about p {
+  color: #b0b0bb;
+  line-height: 1.85;
+  font-size: var(--ic-body);
+  margin-bottom: var(--ic-space-3);
+  text-align: justify;
+}
+
+/* ---------- why join ---------- */
+.al-why {
+  background: #0a0a0f;
+  padding: var(--ic-section-y) var(--ic-section-x);
+  text-align: center;
+}
+
+.al-whygrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--ic-card-gap);
+  max-width: 1150px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.al-whycard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--ic-radius-lg);
+  padding: var(--ic-space-5) var(--ic-space-4);
+  text-align: left;
+  height: 100%;
+  transition: transform 0.3s var(--ic-ease), border-color 0.3s var(--ic-ease);
+}
+
+.al-whycard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.al-whycard i {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #ff0055, #8428f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.al-whycard h3 {
+  margin: 0.7rem 0 0.45rem;
+  font-size: var(--ic-h3);
+}
+
+.al-whycard p {
+  color: #9a9aa6;
+  font-size: var(--ic-small);
+  line-height: 1.65;
+}
+
+/* ---------- directory ---------- */
+.al-directory {
+  padding: var(--ic-section-y) var(--ic-section-x);
+  max-width: 1250px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.al-muted {
+  color: #8b8b95;
+  padding: 2rem 0;
+}
+
+.al-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.al-search {
+  position: relative;
+  flex: 1 1 260px;
+  max-width: 340px;
+}
+
+.al-search i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7a7a88;
   font-size: 1.15rem;
 }
 
-.alumnipage-role {
-  color: #888;
-  font-size: 0.85rem;
-  margin-top: 4px;
+.al-search input,
+.al-filters select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 40px;
+  padding: 11px 16px;
+  color: #eef0f6;
+  font-size: 0.94rem;
+  font-family: inherit;
+  outline: none;
 }
 
-.alumnipage-now {
-  color: #ddd;
-  font-size: 0.95rem;
-  margin-top: 10px;
+.al-search input { padding-left: 42px; }
+
+.al-filters select {
+  width: auto;
+  min-width: 165px;
+  cursor: pointer;
 }
 
-.alumnipage-card a {
-  display: inline-block;
-  margin-top: 12px;
-  color: #0099ff;
-  font-size: 1.5rem;
+.al-filters select option { background: #14141c; color: #eef0f6; }
+
+.al-search input:focus,
+.al-filters select:focus {
+  border-color: #8428f1;
+  box-shadow: 0 0 0 3px rgba(132, 40, 241, 0.22);
+}
+
+.al-clear {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #cfd3e0;
+  border-radius: 40px;
+  padding: 11px 20px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.al-clear:hover { border-color: #fff; color: #fff; }
+
+.al-count {
+  color: #7a7a88;
+  font-size: var(--ic-small);
+  margin-bottom: var(--ic-space-4);
+}
+
+/* ---------- cards ---------- */
+.al-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 235px), 1fr));
+  gap: var(--ic-card-gap);
+  align-items: stretch;
+}
+
+.al-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--ic-radius-lg);
+  padding: var(--ic-space-5) var(--ic-space-4) var(--ic-space-4);
+  text-align: center;
+  height: 100%;
+  transition: transform 0.3s var(--ic-ease), border-color 0.3s var(--ic-ease);
+}
+
+.al-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.al-cardlink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.al-avatar {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 0.9rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff0055, #8428f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.al-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.al-card h3 {
+  font-size: 1.08rem;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.al-desig {
+  color: #dcdce4;
+  font-size: var(--ic-small);
+  line-height: 1.45;
+}
+
+.al-org {
+  color: #8b8b95;
+  font-size: var(--ic-small);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.al-roles {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.al-role {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #c2c2cd;
+}
+
+.al-role-primary {
+  background: rgba(132, 40, 241, 0.22);
+  border-color: rgba(132, 40, 241, 0.5);
+  color: #e5d8ff;
+  font-weight: 600;
+}
+
+.al-linkedin {
+  margin-top: auto;
+  padding-top: var(--ic-space-3);
+  color: #4aa8ff;
+  text-decoration: none;
+  font-size: var(--ic-small);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.al-linkedin:hover { text-decoration: underline; }
+
+.al-more {
+  margin-top: var(--ic-space-5);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #eef0f6;
+  border-radius: 40px;
+  padding: 12px 28px;
+  font-size: 0.94rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.al-more:hover { border-color: #fff; }
+
+/* ---------- empty state / join strip ---------- */
+.al-empty {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1rem 0 2rem;
+}
+
+.al-empty i { font-size: 3.6rem; color: #8428f1; }
+.al-empty h3 { margin: 1rem 0 0.7rem; font-size: 1.45rem; }
+.al-empty p { color: #9a9aa6; line-height: 1.7; }
+.al-alt { margin-top: 1.6rem; font-size: var(--ic-small); }
+.al-alt a { color: #ff9900; }
+
+.al-joinstrip {
+  margin-top: var(--ic-section-y);
+  padding: var(--ic-space-6) var(--ic-space-4);
+  border-radius: var(--ic-radius-lg);
+  background: linear-gradient(120deg, rgba(255, 0, 85, 0.14), rgba(132, 40, 241, 0.14));
+  border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.al-joinstrip p {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 768px) {
+  .al-whygrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .al-whycard { padding: var(--ic-space-4) var(--ic-space-3); }
+  .al-whycard i { font-size: 1.7rem; }
+  .al-whycard h3 { font-size: 1rem; }
+
+  .al-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .al-card { padding: var(--ic-space-4) var(--ic-space-2) var(--ic-space-3); }
+  .al-avatar { width: 68px; height: 68px; font-size: 1.6rem; }
+  .al-card h3 { font-size: 0.95rem; }
+  .al-role { font-size: 0.63rem; padding: 3px 8px; }
+
+  .al-search { max-width: none; flex-basis: 100%; }
+  .al-filters select { flex: 1 1 45%; min-width: 0; }
+  .al-about p { text-align: left; }
 }
