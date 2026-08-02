@@ -126,7 +126,7 @@ function SeedNavbar() {
       </nav>
       <div className="announcement-bar">
           <div className="announcement-track">
-            📢 Important : Offline Presentation Round of Seed Funding will held on 28th July, 2026.
+            📢 Important : Offline Presentation Round of Seed Funding will held on 22nd July, 2026.
           </div>
         </div>
     </>

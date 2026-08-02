@@ -81,7 +81,7 @@ function Homefooter() {
         </div>
 
         <div className="footerend">
-          <span>With love from </span>
+          <span>With ❤︎⁠ from </span>
           <span>Team iConnect, GJUS&T, Hisar</span>
         </div>
       </section>

@@ -34,7 +34,7 @@ function Coreteamabout() {
         ))}
 
         <div className="team-archive-cta reveal fade-up">
-          <Link to="/team">View the team archive — every batch, every year →</Link>
+          <Link to="/team"><button><span>Team Archive →</span></button></Link>
         </div>
       </section>
     </>

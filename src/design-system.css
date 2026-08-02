@@ -124,7 +124,7 @@ select:focus-visible {
   font-size: clamp(1.15rem, 3vw, 1.6rem);
   font-weight: 700;
   color: #111;
-  margin: var(--ic-space-5) 0 var(--ic-space-3);
+  margin: var(--ic-space-5) 0 var(--ic-space-6);
 }
 
 .groupheading::after {

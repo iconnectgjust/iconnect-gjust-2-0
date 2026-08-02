@@ -65,7 +65,7 @@ function Homegallery() {
         )}
 
         <div className="gallery-more">
-          <Link to="/gallery">View the full gallery — all albums →</Link>
+          <Link to="/gallery"><button><span>All Albums →</span></button></Link>
         </div>
 
         {lightboxIndex !== null && (

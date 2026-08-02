@@ -43,7 +43,7 @@ function Homeinit(){
                             </article>
                             <h2>E-Summit</h2>
                             <p className="initdesc">A grand entrepreneurship summit featuring keynote speakers, startup founders, panel discussions, and idea showcases.</p>
-                             <a className="esummitlink" href="https://esummit.iconnectgjust.in" target="_blank" rel="noopener noreferrer">Learn more</a>
+                             <a className="esummitlink" href="https://esummit26.iconnectgjust.in" target="_blank" rel="noopener noreferrer">Learn more</a>
                         </div>
                     </div>
                     <div className="leftcont">

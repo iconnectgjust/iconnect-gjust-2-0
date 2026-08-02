@@ -9,6 +9,6 @@
     { "name": "Content", "icon": "bx-pencil", "desc": "Captions, scripts, articles — the words behind the brand." },
     { "name": "Information Systems", "icon": "bx-code-alt", "desc": "The website, data and tech that keep iConnect running digitally." },
     { "name": "Planning & Logistics", "icon": "bx-calendar", "desc": "Event planning, materials and hospitality for guests and speakers." },
-    { "name": "Promotion", "icon": "bx-megaphone", "desc": "Campus buzz — class visits, word of mouth and community building." }
+    { "name": "Promotion", "icon": "bx-broadcast", "desc": "Campus buzz — class visits, word of mouth and community building." }
   ]
 }

@@ -14,10 +14,10 @@
   font-size: 3rem;
   margin-bottom: 40px;
   color: var(--Neutrals-Black-200, #333);
-font-family: Helvetica;
-font-style: normal;
-font-weight: 700;
-line-height: 125%; 
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; 
 }
 
 @media (max-width: 600px) {
@@ -57,19 +57,96 @@ line-height: 125%;
 }
 
 .gallery-more {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 44px;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .gallery-more a {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.05rem;
-  color: #000;
-  text-decoration: none;
-  border-bottom: 2px solid #000;
-  padding-bottom: 3px;
+  display: block;
+  width: 100%;
+  max-width: 320px;
 }
 
-.gallery-more a:hover {
-  opacity: 0.6;
+.gallery-more button {
+  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  background: linear-gradient(87deg, #000 0%, #424242 73.3%);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 125%;
+  border: none;
+  cursor: pointer;
+}
+
+.gallery-more button span {
+  display: inline-block;
+  position: relative;
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
+  animation: none;
+}
+
+.gallery-more button:hover span {
+  animation: rollUpOnce 0.6s ease-in-out;
+}
+
+@keyframes rollUpOnce {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  55% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .gallery-more {
+    margin-top: 36px;
+    padding: 0 1rem;
+  }
+
+  .gallery-more a {
+    max-width: 280px;
+  }
+
+  .gallery-more button {
+    font-size: 1.25rem;
+    padding: 0.9rem 1.8rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .gallery-more {
+    margin-top: 30px;
+    padding: 0 1rem;
+  }
+
+  .gallery-more a {
+    max-width: 100%;
+  }
+
+  .gallery-more button {
+    font-size: 1rem;
+    padding: 0.85rem 1rem;
+  }
 }

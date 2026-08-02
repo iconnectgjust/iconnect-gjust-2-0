@@ -6,7 +6,7 @@ a {
 
 .navbar {
   overflow-x: clip;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   width: 100%;
@@ -125,7 +125,7 @@ a {
 /* ================= ANNOUNCEMENT BAR ================= */
 
 .announcement-bar {
-  position: sticky;
+  position: fixed;
   top: 85px;
   z-index: 999;
   width: 100%;

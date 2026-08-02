@@ -1,5 +1,5 @@
 .teampage {
-  padding-top: 104px;
+  margin-top: 80px;
   background: #fff;
   min-height: 100vh;
 }
@@ -59,11 +59,23 @@
 }
 
 .teampage-group {
+  width: 100%;
   text-align: center;
   font-family: "Roboto", sans-serif;
-  font-size: 1.6rem;
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
   font-weight: 700;
-  margin: 50px 0 10px;
+  color: #111;
+  margin: var(--ic-space-6) 0 var(--ic-space-6);
+}
+
+.teampage-group::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 3px;
+  margin: 10px auto 0;
+  background: var(--ic-gradient);
 }
 
 .teampage-note {
