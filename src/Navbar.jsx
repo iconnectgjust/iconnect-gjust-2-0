@@ -77,6 +77,7 @@ function Navbar() {
             <li><Link className={linkClass(location.pathname.startsWith("/team"))} to="/team" onClick={pressClick}>Team</Link></li>
             <li><Link className={linkClass(location.pathname === "/alumni")} to="/alumni" onClick={pressClick}>Alumni</Link></li>
             <li><Link className={linkClass(location.pathname === "/contact")} to="/contact" onClick={pressClick}>Contact</Link></li>
+            <li><a href="https://esummit26.iconnectgjust.in/" target='_blank'>E-Summit'26</a></li>
             <li><Link className={linkClass(location.pathname === "/seedfunding")} to="/seedfunding" onClick={pressClick}>Seed Funding</Link></li>
           </ul>
           <a href="#" id="close" onClick={pressClick}><i className='bx bx-x'></i></a>
