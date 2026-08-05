@@ -108,7 +108,7 @@ function App() {
             </>
           } />
           <Route path="/team" element={<><Navbar /><TeamPage /><Homefooter /></>} />
-          <Route path="/team/:year" element={<><Navbar /><TeamPage /><Homefooter /></>} />
+          <Route path="/team/:param" element={<><Navbar /><TeamPage /><Homefooter /></>} />
           <Route path="/alumni" element={<><Navbar /><AlumniPage /><Homefooter /></>} />
           <Route path="/alumni/:slug" element={<><Navbar /><AlumniProfilePage /><Homefooter /></>} />
           <Route path="/pduiic" element={<><Navbar /><PduiicPage /></>} />

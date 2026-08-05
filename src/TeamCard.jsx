@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { photoSrc } from "./lib/publicData";
 import "./TeamCard.css";
 
@@ -10,18 +11,13 @@ function TeamCard({ member, index = 0 }) {
     >
       <div className="teamcard-imgwrap">
         <img src={photoSrc(member.img)} alt={member.name} loading="lazy" />
-        {member.linkedin && (
-          <a
-            className="teamcard-linkedin"
-            href={member.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${member.name} on LinkedIn`}
-          >
-            <i className="bx bxl-linkedin"></i>
-            <span>Connect</span>
-          </a>
-        )}
+        <Link
+          className="teamcard-linkedin"
+          to={`/team/${member.slug}`}
+          aria-label={`View ${member.name}'s profile`}
+        >
+          <span>Connect</span>
+        </Link>
       </div>
       <h2>{member.name}</h2>
       <p>{member.role}</p>

@@ -1,33 +1,34 @@
 {
+  "note": "This ID card holder is a Core Team Member of Team iConnect and is authorized access to the workspace, conference hall, and other facilities as required for team activities and events under Pandit Deendayal Upadhyaya Innovation & Incubation Center.",
   "years": [
     {
       "year": "2025-26",
       "current": true,
       "captains": [
-        { "name": "Rashi", "role": "Captain", "img": "rashi.png", "color": "card-red", "linkedin": "" },
-        { "name": "Rahul Kumar", "role": "Captain", "img": "rahulKumar.png", "color": "card-red", "linkedin": "" }
+        { "name": "Rashi", "role": "Captain", "img": "rashi.png", "color": "card-red", "linkedin": ""},
+        { "name": "Rahul Kumar", "role": "Captain", "img": "rahulKumar.png", "color": "card-red", "linkedin": ""}
       ],
       "heads": [
-        { "name": "Anshul Bhyan", "role": "HR Head", "img": "anshul.png", "color": "card-purple", "linkedin": "" },
-        { "name": "Rahul", "role": "Innovation & Incubation Head", "img": "rahul.png", "color": "card-purple", "linkedin": "" },
-        { "name": "Sagar", "role": "IIC Head", "img": "sagar.png", "color": "card-purple", "linkedin": "" }
+        { "name": "Anshul Bhyan", "role": "HR Head", "img": "anshul.png", "color": "card-purple", "linkedin": ""},
+        { "name": "Rahul", "role": "Innovation & Incubation Head", "img": "rahul.png", "color": "card-purple", "linkedin": ""},
+        { "name": "Sagar", "role": "IIC Head", "img": "sagar.png", "color": "card-purple", "linkedin": ""}
       ],
       "leads": [
-        { "name": "Sanju Singh", "role": "Marketing Lead", "img": "sanju.png", "color": "card-yellow", "linkedin": "" },
-        { "name": "Shreya Mittal", "role": "Operation Lead", "img": "shreya.png", "color": "card-yellow", "linkedin": "" },
-        { "name": "Garima Verma", "role": "Information System Lead", "img": "garima.png", "color": "card-yellow", "linkedin": "" }
+        { "name": "Sanju Singh", "role": "Marketing Lead", "img": "sanju.png", "color": "card-yellow", "linkedin": ""},
+        { "name": "Shreya Mittal", "role": "Operation Lead", "img": "shreya.png", "color": "card-yellow", "linkedin": ""},
+        { "name": "Garima Verma", "role": "Information System Lead", "img": "garima.png", "color": "card-yellow", "linkedin": ""}
       ],
       "coordinators": [
-        { "name": "Jatin Jangra", "role": "Media Coordinator", "img": "jatinJangra.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Jatin", "role": "Infographics Coordinator", "img": "jatin.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Gautam", "role": "Infographics Coordinator", "img": "gautam.jpg", "color": "card-blue", "linkedin": "" },
-        { "name": "Manvi", "role": "Content Writing Coordinator", "img": "manvi.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Ankush", "role": "Executive & Hospitality Coordinator", "img": "ankush.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Gourav", "role": "Logistics Coordinator", "img": "gaurav.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Priya Yadav", "role": "Planning Coordinator", "img": "priya.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Lavanya", "role": "Website Coordinator", "img": "lavanya.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Akhil Sharma", "role": "Data Coordinator", "img": "akhil.png", "color": "card-blue", "linkedin": "" },
-        { "name": "Grecika", "role": "Promotion Coordinator", "img": "grecika.png", "color": "card-blue", "linkedin": "" }
+        { "name": "Jatin Jangra", "role": "Media Coordinator", "img": "jatinJangra.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Jatin", "role": "Infographics Coordinator", "img": "jatin.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Gautam", "role": "Infographics Coordinator", "img": "gautam.jpg", "color": "card-blue", "linkedin": ""},
+        { "name": "Manvi", "role": "Content Writing Coordinator", "img": "manvi.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Ankush", "role": "Executive & Hospitality Coordinator", "img": "ankush.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Gourav", "role": "Logistics Coordinator", "img": "gaurav.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Priya Yadav", "role": "Planning Coordinator", "img": "priya.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Lavanya", "role": "Website Coordinator", "img": "lavanya.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Akhil Sharma", "role": "Data Coordinator", "img": "akhil.png", "color": "card-blue", "linkedin": ""},
+        { "name": "Grecika", "role": "Promotion Coordinator", "img": "grecika.png", "color": "card-blue", "linkedin": ""}
       ]
     }
   ]

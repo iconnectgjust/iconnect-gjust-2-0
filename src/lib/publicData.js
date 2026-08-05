@@ -13,6 +13,15 @@ export function photoSrc(ref) {
   return /^https?:\/\//.test(ref) ? ref : assetUrl(ref);
 }
 
+function slugify(str) {
+  return (str || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 const cache = {};
 async function cached(key, fn) {
   if (!(key in cache)) cache[key] = fn().catch(() => null);
@@ -36,7 +45,7 @@ const jsonTeamFallback = () =>
       .map((g) => ({
         name: g.name,
         members: g.members.map((m) => ({
-          name: m.name, role: m.role, img: m.img, color: m.color, linkedin: m.linkedin || "",
+          slug: slugify(m.name), name: m.name, role: m.role, img: m.img, color: m.color, linkedin: m.linkedin || "", rollno: m.rollno || "", department: m.department || "", course: m.course || "",
         })),
       })),
   }));
@@ -46,7 +55,7 @@ export async function fetchTeamYears() {
   const live = await cached("team", async () => {
     const { data: sessions, error } = await supabase
       .from("team_sessions")
-      .select("id, year, is_current, sort, team_groups(id, name, sort, team_members(name, role, linkedin, photo_url, color, sort))")
+      .select("id, year, is_current, sort, team_groups(id, name, sort, team_members(name, role, linkedin, photo_url, color, sort, rollno, department, course))")
       .order("sort", { ascending: false });
     if (error || !sessions?.length) return null;
     return sessions.map((s) => ({
@@ -58,7 +67,7 @@ export async function fetchTeamYears() {
           name: g.name,
           members: (g.team_members || [])
             .sort((a, b) => a.sort - b.sort)
-            .map((m) => ({ name: m.name, role: m.role, img: m.photo_url, color: m.color, linkedin: m.linkedin })),
+            .map((m) => ({ slug: slugify(m.name), name: m.name, role: m.role, img: m.photo_url, color: m.color, linkedin: m.linkedin, rollno: m.rollno, department: m.department, course: m.course})),
         }))
         .filter((g) => g.members.length > 0),
     }));
