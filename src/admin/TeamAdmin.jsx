@@ -480,7 +480,7 @@ function TeamAdmin() {
             </label>
 
             <label>
-              course
+              Course
               <input
                 value={memberEdit.draft.course}
                 onChange={(e) =>
