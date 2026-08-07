@@ -74,7 +74,11 @@ function TeamInfo({ slug: slugProp }) {
 
         <div className="teaminfo-main">
           <div className="teaminfo-photowrap">
-            <img src={photoSrc(member.img)} alt={member.name} className="teaminfo-photo" />
+            <img
+              src={photoSrc(member.img)}
+              alt={member.name}
+              className="teaminfo-photo"
+            />
           </div>
 
           <div className="teaminfo-info">
@@ -125,10 +129,12 @@ function TeamInfo({ slug: slugProp }) {
           </div>
         </div>
 
-        {member.note && (
+        {(member.role === "Mentor" ? member.notementor : member.noteteam) && (
           <div className="teaminfo-note">
             <span className="teaminfo-note-title">Official Note</span>
-            <p>{member.note}</p>
+            <p>
+              {member.role === "Mentor" ? member.notementor : member.noteteam}
+            </p>
           </div>
         )}
 

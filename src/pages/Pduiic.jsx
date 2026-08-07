@@ -37,7 +37,7 @@ const facilities = [
 
 function Pduiic() {
   useScrollAnimation();
-  const buildingImg = assetUrl("pduiicBuilding.jpg") || assetUrl("aboutimg.jpeg");
+  const buildingImg = assetUrl("pduiic.jpeg") || assetUrl("aboutimg.jpeg");
 
   return (
     <div className="pduiicpage">

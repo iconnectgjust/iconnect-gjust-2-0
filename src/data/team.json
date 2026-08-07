@@ -1,5 +1,6 @@
 {
-  "note": "This ID card holder is a Core Team Member of Team iConnect and is authorized access to the workspace, conference hall, and other facilities as required for team activities and events under Pandit Deendayal Upadhyaya Innovation & Incubation Center.",
+  "noteteam": "This ID card holder is a Core Team Member of Team iConnect and is authorized access to the workspace, conference hall, and other facilities as required for team activities and events under Pandit Deendayal Upadhyaya Innovation & Incubation Center.",
+  "notementor": "This ID card holder is a Mentor of Team iConnect and is authorized access to the workspace, conference hall, and other facilities as required for team activities and events under Pandit Deendayal Upadhyaya Innovation & Incubation Center.",
   "years": [
     {
       "year": "2025-26",
@@ -29,6 +30,11 @@
         { "name": "Lavanya", "role": "Website Coordinator", "img": "lavanya.png", "color": "card-blue", "linkedin": ""},
         { "name": "Akhil Sharma", "role": "Data Coordinator", "img": "akhil.png", "color": "card-blue", "linkedin": ""},
         { "name": "Grecika", "role": "Promotion Coordinator", "img": "grecika.png", "color": "card-blue", "linkedin": ""}
+      ],
+      "advisory": [
+        { "name": "Aakanshi Chillar", "role": "Mentor", "img": "", "color": "card-green", "linkedin": ""},
+        { "name": "Vipin", "role": "Mentor", "img": "", "color": "card-green", "linkedin": ""},
+        { "name": "Sarika", "role": "Mentor", "img": "", "color": "card-green", "linkedin": ""}
       ]
     }
   ]

@@ -1,5 +1,5 @@
 import "./PduAboutus.css";
-import aboutimage from "../../assets/aboutimg.jpeg";
+import aboutimage from "../../assets/aboutImage.jpg";
 import visionlogo from "../../assets/visionimg.png";
 
 function pduAboutus(){

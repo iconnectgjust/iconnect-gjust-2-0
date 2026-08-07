@@ -16,7 +16,8 @@ function slugify(str) {
 // The note is one shared piece of copy for every member (not per-person
 // data), so it's read straight from the root of team.json — add
 // `"note": "..."` there once, and it appears on every profile page.
-const sharedNote = teamJson.note || "";
+const sharedNote = teamJson.noteteam || "";
+const mentorNote = teamJson.notementor || "";
 
 // → {slug, name, role, img, color, linkedin, rollNo, department, branch,
 //    note, year, current, group} | null
@@ -36,7 +37,8 @@ export async function fetchTeamMember(slug) {
           const found = {
             ...m,
             slug,
-            note: sharedNote,
+            noteteam: sharedNote,
+            notementor: mentorNote,
             year: y.year,
             current: !!y.current,
             group: group.name,
