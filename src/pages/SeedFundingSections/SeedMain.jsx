@@ -34,7 +34,7 @@ useScrollAnimation();
         <div className="hero-content reveal slide-left">
           <div className="badge">
             <span className="dot"></span>
-            <h2>Completion Activities Update</h2>
+            <h2>Funded Teams Showcase Update</h2>
           </div>
 
           <h1>
