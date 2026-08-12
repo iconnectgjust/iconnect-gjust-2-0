@@ -1,25 +1,41 @@
 import "./SeedUpdates.css";
 import "../../ScrollAnimation.css";
 import useScrollAnimation from "../../ScrollAnimation";
-import React, { useState }from "react";
+import React, { useState } from "react";
 
 const TABS = ["All", "Announcements", "Deadlines", "Schedules", "Results"];
 
 const announcements = [
   {
     id: 1,
+    date: "August 11, 2026",
+    tags: [{ label: "URGENT", type: "urgent", dot: true }],
+    title: "Funded Teams Showcase Update",
+    description:
+      "Teams receiving Seed Funding are required to present and showcase their funded idea at every relevant event organized under PDUIIC. Participation and presentation are compulsory for all funded teams.",
+    category: "Announcements",
+  },
+  {
+    id: 2,
+    date: "August 10, 2026",
+    tags: [{ label: "CLOSED", type: "deadline" }],
+    title: "Seed Funding Presentations",
+    description:
+      "Shortlisted teams presented their innovative ideas in front of the Vice Chancellor as part of the Seed Funding process.",
+    category: "Announcements",
+  },
+  {
+    id: 3,
     date: "July 28, 2026",
     time: "10:30 AM Onwards",
-    tags: [{ label: "OPEN", type: "open" },
-      { label: "URGENT", type: "urgent", dot: true },
-    ],
+    tags: [{ label: "CLOSED", type: "deadline" }],
     title: "Offline Presentations",
     description:
       "Shortlisted candidates with the complete team, along with the Project Mentor (Compulsory), must be present during the presentation. Participants are requested to report to the venue at least 15 minutes before their allotted presentation slot with their presentation and any supporting materials. Non-attendance or the absence of the Project Mentor may lead to disqualification from further consideration.",
     category: "Announcements",
   },
   {
-    id: 2,
+    id: 4,
     date: "July 15, 2026",
     time: "11:59 PM",
     tags: [{ label: "CLOSED", type: "deadline" }],
@@ -29,7 +45,7 @@ const announcements = [
     category: "Deadlines",
   },
   {
-    id: 3,
+    id: 5,
     date: "June 15, 2026",
     time: "10:00 AM",
     tags: [{ label: "CLOSED", type: "deadline" }],
@@ -41,7 +57,7 @@ const announcements = [
 ];
 
 function SeedUpdates() {
-useScrollAnimation();
+  useScrollAnimation();
 
   const [activeTab, setActiveTab] = useState("All");
 
@@ -53,7 +69,9 @@ useScrollAnimation();
   return (
     <section id="updates" className="announcements">
       <p className="eyebrow">Updates</p>
-      <h2 className="heading reveal slide-left">Announcements &amp; Important notices</h2>
+      <h2 className="heading reveal slide-left">
+        Announcements &amp; Important notices
+      </h2>
 
       <div className="tabs">
         {TABS.map((tab) => (

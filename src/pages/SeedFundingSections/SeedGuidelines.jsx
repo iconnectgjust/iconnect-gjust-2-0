@@ -41,6 +41,7 @@ const guidelines = [
     title: "Non Compliance",
     items: [
       "Misuse of funds may lead to cancellation of funding and disciplinary action",
+      "Teams receiving Seed Funding must present their funded idea at every relevant event organized under PDUIIC.",
     ],
   },
   {
