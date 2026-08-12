@@ -126,7 +126,7 @@ function SeedNavbar() {
       </nav>
       <div className="announcement-bar">
           <div className="announcement-track">
-            📢 Important : Seed Funding Completion Activities Update.
+            📢 Important : Seed Funded Teams Showcase Update.
           </div>
         </div>
     </>
