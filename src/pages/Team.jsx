@@ -23,10 +23,19 @@ function Team() {
   // revealed until a hard reload remounts everything.
   useScrollAnimation([years, param]);
 
-  useEffect(() => { fetchTeamYears().then(setYears); }, []);
+  useEffect(() => {
+    fetchTeamYears().then(setYears);
+  }, []);
 
   if (!years.length) {
-    return <div className="teampage"><header className="teampage-hero"><h1>TEAM ARCHIVE</h1><p>Loading…</p></header></div>;
+    return (
+      <div className="teampage">
+        <header className="teampage-hero">
+          <h1>TEAM ARCHIVE</h1>
+          <p>Loading…</p>
+        </header>
+      </div>
+    );
   }
 
   // /team/:param serves two things off one route: a year ("/team/2024")
@@ -50,7 +59,9 @@ function Team() {
 
       <header className="teampage-hero">
         <h1>TEAM ARCHIVE</h1>
-        <p>Every batch that carried iConnect forward — preserved, year by year.</p>
+        <p>
+          Every batch that carried iConnect forward — preserved, year by year.
+        </p>
         <div className="teampage-years">
           {years.map((y) => (
             <button
@@ -58,7 +69,8 @@ function Team() {
               className={`teampage-yearchip ${y.year === selected.year ? "teampage-yearchip-active" : ""}`}
               onClick={() => navigate(`/team/${y.year}`)}
             >
-              {y.year}{y.current ? " · Current" : ""}
+              {y.year}
+              {y.current ? " · Current" : ""}
             </button>
           ))}
         </div>
@@ -70,13 +82,19 @@ function Team() {
             <h2 className="teampage-group reveal fade-up">{group.name}</h2>
             <div className="teamgrid">
               {group.members.map((m, i) => (
-                <TeamCard member={m} index={i} isCurrent={selected.current} key={m.name + i} />
+                <TeamCard
+                  member={m}
+                  index={i}
+                  isCurrent={selected.current}
+                  key={m.name + i}
+                />
               ))}
             </div>
           </div>
         ))}
         <p className="teampage-note">
-          A new batch is added here every year — alumni never disappear from iConnect&apos;s history.
+          A new batch is added here every year — alumni never disappear from
+          iConnect&apos;s history.
         </p>
       </section>
     </div>
