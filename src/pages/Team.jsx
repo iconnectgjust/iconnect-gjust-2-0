@@ -70,7 +70,7 @@ function Team() {
             <h2 className="teampage-group reveal fade-up">{group.name}</h2>
             <div className="teamgrid">
               {group.members.map((m, i) => (
-                <TeamCard member={m} index={i} key={m.name + i} />
+                <TeamCard member={m} index={i} isCurrent={selected.current} key={m.name + i} />
               ))}
             </div>
           </div>
